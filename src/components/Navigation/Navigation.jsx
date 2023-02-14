@@ -7,7 +7,7 @@ function Navigation() {
       <ul className="links">
         <li className="links__item">
           <NavLink
-            to=""
+            to="/movies"
             className="links__link"
             activeClassName="links__link links__link_active"
           >
@@ -16,7 +16,7 @@ function Navigation() {
         </li>
         <li className="links__item">
           <NavLink
-            to=""
+            to="/saved-movies"
             className="links__link"
             activeClassName="links__link links__link_active"
           >

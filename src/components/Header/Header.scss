@@ -12,6 +12,9 @@
 
   &__link-container {
     display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 0 0 20px;
   }
 }
 

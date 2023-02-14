@@ -12,7 +12,7 @@ function Header({ isLogin }) {
       className={`header ${actualPath === '/' ? 'header-type-landing' : ''}`}
     >
       <Logo />
-      {isLogin
+      {true
         ? (
           <div className="header__link-container">
             <Navigation />
