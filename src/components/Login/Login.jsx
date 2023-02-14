@@ -10,7 +10,7 @@ function Login() {
     <main>
       <section className="login-page">
         <Logo />
-        <h1 className="login-page__title">Добро пожаловать!</h1>
+        <h1 className="login-page__title">Рады видеть!</h1>
         <form className="form-login" onSubmit={onSubmit}>
           <label className="form-login__label" htmlFor="Email">
             Email
