@@ -1,15 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import './AccountLink.scss';
+import accountImg from '../../images/account.svg';
+import manIcon from '../../images/man-icon.svg';
 
 function AccountLink() {
   return (
-    <NavLink
-      to="/profile"
-      className="account-link"
-      activeClassName="account-link account-link_active"
-    >
-      Аккаунт
-    </NavLink>
+    <div className="account-link__container">
+      <NavLink
+        to="/profile"
+        className="account-link"
+        activeClassName="account-link account-link_active"
+      >
+        Аккаунт
+      </NavLink>
+      <div className="account-link__img-container">
+        <img src={accountImg} className="account-link__man-icon-background" />
+        <img src={manIcon} alt="мэн" className="account-link__man-icon" />
+      </div>
+    </div>
   );
 }
 

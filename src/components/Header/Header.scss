@@ -10,6 +10,15 @@
   right: 0;
   z-index: 999;
 
+  &__container {
+    display: none;
+    @media (min-width: 1280px) {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
   &__link-container {
     display: flex;
     width: 100%;
