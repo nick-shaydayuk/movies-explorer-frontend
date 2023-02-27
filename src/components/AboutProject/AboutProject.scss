@@ -1,6 +1,10 @@
 .about {
-  padding: 110px 70px;
+  padding: 70px 18px;
   text-align: left;
+
+  @media (min-width: 768px) {
+    padding: 110px 70px;
+  }
 
   &__title {
     font-size: 22px;
@@ -10,15 +14,20 @@
     padding-bottom: 23px;
     letter-spacing: -0.04em;
     margin-block: 0;
-    margin: 0 0 70px;
+    margin: 0 0 60px;
 
   }
 
   &__container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 110px;
+    margin-bottom: 65px;
+    gap: 56px;
+    @media (min-width: 768px) {
+      margin-bottom: 110px;
+      flex-direction: row;
+    }
   }
 
   &__project {
@@ -44,18 +53,18 @@
   }
 
   &__container-duration {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 
   &__front-end-duration {
-    width: calc(100% - 228px);
     text-align: center;
+    grid-column: 2/5;;
   }
 
   &__back-end-duration {
-    width: 228px;
     text-align: center;
+    grid-column: 1/2;
   }
 
   &__time {

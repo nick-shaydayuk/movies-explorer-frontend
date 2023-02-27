@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import './AccountLink.scss';
 import accountImg from '../../images/account.svg';
 import manIcon from '../../images/man-icon.svg';
+import './AccountLink.scss' 
 
 function AccountLink() {
   return (

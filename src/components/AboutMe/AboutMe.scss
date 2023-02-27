@@ -1,34 +1,52 @@
 .about-me {
-  padding: 110px 70px 0;
+  padding: 70px 14px;
   text-align: left;
 
+  @media (min-width: 768px) {
+    padding: 110px 70px 0;
+  }
+
   &__container {
-    padding-top: 66px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     justify-content: space-between;
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
   }
 
   &__container-text {
-    width: 600px;
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   &__header {
-    font-size: 50px;
-    line-height: 58px;
+    font-size: 30px;
+    line-height: 36px;
     font-weight: 400;
     color: #000;
     margin-block: 0;
     margin-bottom: 18px;
     letter-spacing: -0.04em;
+    padding-top: 40px;
+    @media (min-width: 768px) {
+      font-size: 50px;
+      line-height: 58px;
+    }
   }
 
   &__description-title {
-    font-size: 18px;
-    line-height: 20px;
     font-weight: 500;
     margin-block: 0;
     margin-bottom: 26px;
+    font-size: 11px;
+    line-height: 16px;
+    @media (min-width: 768px) {
+      font-size: 18px;
+      line-height: 20px;
+    }
   }
 
   &__description {
@@ -37,11 +55,19 @@
     font-weight: 400;
     margin-block: 0;
     margin-bottom: 99px;
+
+    @media (min-width: 768px) {
+      display: inline-block;
+      max-width: 600px;
+    }
   }
 
   &__photo {
-    width: 270px;
+    width: 292px;
     border-radius: 10px;
+    @media (min-width: 768px) {
+      width: 270px;
+    }
   }
 
   &__link {

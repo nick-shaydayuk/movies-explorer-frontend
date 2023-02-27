@@ -1,7 +1,7 @@
 import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
-import cardPath from '../../images/promo-img.svg';
+import cardPath from '../../images/student.png';
 
 function MovieCardList() {
   const currentPath = useLocation().pathname;
@@ -108,20 +108,30 @@ function MovieCardList() {
   }
   return (
     <>
-      <div className={`card-list ${currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''}`}>
-        {
-          movieCardsTest.map((movieCard) => (
-            <MovieCard
-              key={movieCard.id}
-              cardPath={cardPath}
-              title={movieCard.title}
-              duracion={movieCard.duration}
-            />
-          ))
-        }
+      <div
+        className={`card-list ${
+          currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
+        }`}
+      >
+        {movieCardsTest.map((movieCard) => (
+          <MovieCard
+            key={movieCard.id}
+            cardPath={cardPath}
+            title={movieCard.title}
+            duracion={movieCard.duration}
+          />
+        ))}
       </div>
-      {currentPath === '/movies'
-      && <button type="button" aria-label="Кнопка ещё" onClick={handleMovie} className="more-button">Ещё</button>}
+      {currentPath === '/movies' && (
+        <button
+          type="button"
+          aria-label="Кнопка ещё"
+          onClick={handleMovie}
+          className="more-button"
+        >
+          Ещё
+        </button>
+      )}
     </>
   );
 }
