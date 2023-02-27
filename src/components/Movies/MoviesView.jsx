@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function MoviesView({ isLogin }) {
   return (
-    <>
+    <section className="movies">
       <Header
         isLogin={isLogin}
       />
@@ -14,7 +14,7 @@ function MoviesView({ isLogin }) {
         <MoviesCardList />
       </main>
       <Footer />
-    </>
+    </section>
   );
 }
 

@@ -1,56 +1,83 @@
 .register {
   display: flex;
   flex-direction: column;
+  padding: 56px 30px;
   box-sizing: border-box;
   width: 100%;
-  text-align: left;
-  padding: 56px 30px 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
   @media (min-width: 768px) {
-    padding: 232px 186px;
-  }
-
-  @media (min-width: 1280px) {
-    padding: 70px 442px;
+    margin: 0 auto;
+    align-items: flex-start;
+    max-width: 396px;
+    padding: 56px 0 30px;
   }
 
   &__title {
+    display: inline-block;
     font-size: 24px;
     line-height: 29px;
     font-weight: 500;
-    display: inline-block;
     padding: 40px 0;
     margin: 0;
   }
 
   &__text {
-    font-size: 14px;
-    line-height: 17px;
     font-weight: 400;
     color: #a0a0a0;
     margin-block: 0;
     width: 100%;
     text-align: center;
+    font-size: 12px;
+    line-height: 15px;
+    @media (min-width: 768px) {
+      font-size: 14px;
+      line-height: 17px;
+    }
   }
 
   &__link {
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 12px;
+    line-height: 15px;
     font-weight: 400;
-    color: #FF6838;
+    color: #ff6838;
     text-decoration: none;
+    display: inline-block;
     margin-left: 6px;
+    @media (min-width: 768px) {
+      font-size: 14px;
+      line-height: 17px;
+    }
   }
 }
 
 .form-register {
-  margin-bottom: 42px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  text-align: left;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  max-width: 260px;
+
+  @media (min-width: 768px) {
+    gap: 179px;
+    justify-content: unset;
+    max-width: none;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
   &__label {
-    display: block;
+    display: flex;
+    flex-direction: column;
     font-size: 10px;
     line-height: 14px;
     font-weight: 400;
@@ -69,11 +96,16 @@
     background: #f9f9f9;
     padding: 0 15px;
     box-sizing: border-box;
+    max-width: 260px;
+
+    @media (min-width: 768px) {
+      max-width: 396px;
+    }
   }
 
   &__submit {
     width: 100%;
-    background: #FF6838;
+    background: #ff6838;
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;
@@ -84,9 +116,15 @@
     transition: opacity 0.3s linear;
     padding: 0;
     border: none;
-
+    margin-bottom: 14px;
+    max-width: 260px;
     &:hover {
       opacity: 0.8;
+      transition: opacity 0.3s linear;
+    }
+
+    @media (min-width: 768px) {
+      max-width: none;
     }
   }
 

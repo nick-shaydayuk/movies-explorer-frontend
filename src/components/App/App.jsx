@@ -9,6 +9,7 @@ import NotFoundView from '../NotFoundView/NotFoundView';
 import Profile from '../Profile/Profile';
 import MoviesView from '../Movies/MoviesView';
 import { useState } from 'react';
+import SavedMovies from '../SavedMovies/SavedMovies'
 
 //const history = useNavigate();
 
@@ -52,10 +53,10 @@ function App() {
           element={<Profile isLogin={isLogin} signOut={signOut} />}
         />
         <Route path="/movies" element={<MoviesView isLogin={isLogin} />} />
-        {/* <Route
+        <Route
           path="/saved-movies"
-          element={<SavedMoviesView isLogin={isLogin} />}
-        /> */}
+          element={<SavedMovies isLogin={isLogin} />}
+        />
         <Route path="*" element={<NotFoundView />} />
       </Routes>
     </div>

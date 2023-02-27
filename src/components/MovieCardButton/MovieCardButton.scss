@@ -1,24 +1,20 @@
 .movie-button {
-  width: 16px;
-  height: 16px;
+  width: 33px;
+  height: 33px;
   padding: 0;
-  border-radius: 50%;
   background: transparent;
   cursor: pointer;
   border-color: #fff;
   border-style: solid;
   transition: background 0.3s linear;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.09);
+  background-image: url(../../images/save-m.svg);
 
   &_like {
-    background: #2be080;
+    background-image: url(../../images/saved-m.svg);
   }
 
   &:hover {
-    background: #2be08050;
+    opacity: 0.8;;
   }
 
-  &:focus-visible {
-    outline: 2px solid #2be080;
-  }
 }
