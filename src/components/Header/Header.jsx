@@ -6,12 +6,15 @@ import AuthNavigation from '../AuthNavigation/AuthNavigation';
 import AccountLink from '../AccountLink/AccountLink';
 import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
-import { Route, Routes } from 'react-router-dom';
 
 function Header({ isLogin }) {
   const actualPath = useLocation().pathname;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  }
 
   return (
     <header
@@ -19,27 +22,21 @@ function Header({ isLogin }) {
     >
       <Logo />
       <div className="header__container">
-        {false ? (
+        {true ? (
           <div className="header__link-container">
             <Navigation />
             <AccountLink />
+            <button
+              className="header__burger"
+              onClick={() => setIsMenuOpen(true)}
+            ></button>
           </div>
         ) : (
           <AuthNavigation />
         )}
       </div>
-      <Routes>
-        <Route
-          path="/profile"
-          element={
-            <button
-              className="header__burger"
-              onClick={() => setIsMenuOpen(true)}
-            ></button>
-          }
-        />
-      </Routes>
-      {isMenuOpen ? <MobileMenu /> : <></>}
+
+      {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
     </header>
   );
 }

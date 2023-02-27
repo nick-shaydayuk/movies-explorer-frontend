@@ -10,7 +10,6 @@ function AccountLink() {
       <NavLink
         to="/profile"
         className="account-link"
-        activeClassName="account-link account-link_active"
       >
         Аккаунт
       </NavLink>

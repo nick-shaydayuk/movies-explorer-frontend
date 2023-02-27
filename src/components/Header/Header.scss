@@ -21,14 +21,11 @@
   }
 
   &__container {
-    /* display: none; */
-    /* @media (min-width: 1280px) { */
-      display: flex;
-      width: 100%;
-      justify-content: flex-end;
-      height: 100%;
-      align-items: center;
-    /* } */
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: center;
   }
 
   &__link-container {
@@ -36,9 +33,22 @@
     width: 100%;
     justify-content: space-between;
     padding: 0 0 0 20px;
+
+    .account-link__container {
+      display: none;
+      @media (min-width: 1280px) {
+        display: flex;
+      }
+    }
   }
 
   &__burger {
+    display: block;
+    width: 40px;
+    height: 54px;
+    background: transparent;
+    border: none;
+    background-image: url(../../images/burger.svg);
     @media (min-width: 1280px) {
       display: none;
     }

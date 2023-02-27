@@ -9,7 +9,6 @@ function Navigation() {
           <NavLink
             to="/movies"
             className="links__link"
-            activeClassName="links__link links__link_active"
           >
             Фильмы
           </NavLink>
@@ -18,7 +17,6 @@ function Navigation() {
           <NavLink
             to="/saved-movies"
             className="links__link"
-            activeClassName="links__link links__link_active"
           >
             Сохранённые фильмы
           </NavLink>

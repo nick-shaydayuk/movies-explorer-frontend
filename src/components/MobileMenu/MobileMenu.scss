@@ -1,3 +1,49 @@
 .mobile-menu {
-  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 14px;
+  justify-content: space-between;
+
+  &__close-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__close-btn {
+    display: block;
+    background-image: url(../../images/close.svg);
+    height: 36px;
+    width: 25px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  &__links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    a {
+      color: black;
+      text-decoration: none;
+    }
+  }
+
+  &__accont-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    .account-link__container {
+      justify-content: center;
+    }
+  }
 }
