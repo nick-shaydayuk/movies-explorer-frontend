@@ -4,9 +4,11 @@ import logoPath from '../../images/logo.svg';
 
 function Logo() {
   return (
-    <NavLink to="/" className="logo-link">
-      <img src={logoPath} alt="логотип проекта" className="logo__img" />
-    </NavLink>
+    <div className="logo">
+      <NavLink to="/" className="logo-link">
+        <img src={logoPath} alt="логотип проекта" className="logo__img" />
+      </NavLink>
+    </div>
   );
 }
 

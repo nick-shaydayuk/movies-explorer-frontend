@@ -108,7 +108,7 @@ function MovieCardList() {
   }
   return (
     <>
-      <div
+      <ul
         className={`card-list ${
           currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
         }`}
@@ -121,7 +121,7 @@ function MovieCardList() {
             duracion={movieCard.duration}
           />
         ))}
-      </div>
+      </ul>
       {currentPath === '/movies' && (
         <button
           type="button"

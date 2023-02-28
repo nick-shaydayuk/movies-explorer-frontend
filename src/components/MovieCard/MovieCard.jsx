@@ -8,7 +8,7 @@ function MovieCard({ cardPath, title, duracion }) {
     console.log(evt);
   }
   return (
-    <div className="movie-item">
+    <li className="movie-item">
       <article className="movie-card">
         <figure className="movie-card__card">
           <img
@@ -35,7 +35,7 @@ function MovieCard({ cardPath, title, duracion }) {
           </figcaption>
         </figure>
       </article>
-    </div>
+    </li>
   );
 }
 
