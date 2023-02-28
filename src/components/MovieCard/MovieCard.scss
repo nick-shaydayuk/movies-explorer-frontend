@@ -1,5 +1,14 @@
 .movie-card {
   background-color: #fff;
+  max-width: 300px;
+
+  @media (min-width: 768px) {
+    max-width: 339px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 364px;
+  }
 
   &__card {
     margin-block: 0;
@@ -14,6 +23,15 @@
     display: block;
     object-fit: cover;
     width: 100%;
+    max-width: 300px;
+
+    @media (min-width: 768px) {
+      max-width: 339px;
+    }
+
+    @media (min-width: 1280px) {
+      max-width: 364px;
+    }
   }
 
   &__info {
@@ -74,4 +92,13 @@
 .movie-item {
   list-style-type: none;
   width: 100%;
+  max-width: 300px;
+
+  @media (min-width: 768px) {
+    max-width: 339px;
+  }
+
+  @media (min-width: 1280px) {
+    max-width: 364px;
+  }
 }

@@ -1,7 +1,7 @@
 import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
-import cardPath from '../../images/student.png';
+import cardPath from '../../images/movie.png';
 
 function MovieCardList() {
   const currentPath = useLocation().pathname;

@@ -1,13 +1,15 @@
 .movie-button {
-  width: 33px;
-  height: 33px;
+  width: 34px;
+  height: 34px;
   padding: 0;
+  margin: 0;
   background: transparent;
   cursor: pointer;
   border-color: #fff;
   border-style: solid;
   transition: background 0.3s linear;
   background-image: url(../../images/save-m.svg);
+  background-repeat: no-repeat;
 
   &_like {
     background-image: url(../../images/saved-m.svg);

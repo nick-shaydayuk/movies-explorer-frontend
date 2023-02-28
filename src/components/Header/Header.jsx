@@ -14,29 +14,31 @@ function Header({ isLogin }) {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  }
+  };
 
   return (
     <header
       className={`header ${actualPath === '/' ? 'header-type-landing' : ''}`}
     >
-      <Logo />
-      <div className="header__container">
-        {true ? (
-          <div className="header__link-container">
-            <Navigation />
-            <AccountLink />
-            <button
-              className="header__burger"
-              onClick={() => setIsMenuOpen(true)}
-            ></button>
-          </div>
-        ) : (
-          <AuthNavigation />
-        )}
-      </div>
+      <div className="header__content">
+        <Logo />
+        <div className="header__container">
+          {true ? (
+            <div className="header__link-container">
+              <Navigation />
+              <AccountLink />
+              <button
+                className="header__burger"
+                onClick={() => setIsMenuOpen(true)}
+              ></button>
+            </div>
+          ) : (
+            <AuthNavigation />
+          )}
+        </div>
 
-      {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
+        {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
+      </div>
     </header>
   );
 }

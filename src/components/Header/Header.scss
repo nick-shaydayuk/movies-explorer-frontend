@@ -12,12 +12,32 @@
   box-sizing: border-box;
   background: #fff;
 
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+
+
+    @media (min-width: 768px) {
+      max-width: 768px;
+      padding: 0 30px;
+    }
+
+    @media (min-width: 1280px) {
+      max-width: 1280px;
+      padding: 0 70px;
+    }
+  }
+
   @media (min-width: 768px) {
-    padding: 18px 30px;
+    padding: 18px 0;
   }
 
   @media (min-width: 1280px) {
-    padding: 18px 70px;
+    padding: 18px 0;
   }
 
   &__container {
