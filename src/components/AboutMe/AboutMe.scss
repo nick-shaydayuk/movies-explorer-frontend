@@ -1,9 +1,22 @@
 .about-me {
   padding: 70px 14px;
-  text-align: left;
+  
 
   @media (min-width: 768px) {
     padding: 110px 70px 0;
+  }
+
+  &__wrapper {
+    text-align: left;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+      max-width: 768px;
+    }
+    @media (min-width: 1280px) {
+      max-width: 1280px;
+    }
   }
 
   &__container {

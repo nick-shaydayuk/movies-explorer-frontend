@@ -1,11 +1,23 @@
 .techs {
-  display: flex;
-  flex-direction: column;
   padding: 70px 18px;
   background-color: #f5f5f5;
 
   @media (min-width: 768px) {
     padding: 100px 70px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+      max-width: 768px;
+    }
+    @media (min-width: 1280px) {
+      max-width: 1280px;
+    }
   }
 
   &__title {

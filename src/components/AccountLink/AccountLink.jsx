@@ -12,7 +12,7 @@ function AccountLink() {
           Аккаунт
         </NavLink>
         <div className="account-link__img-container">
-          <img src={accountImg} className="account-link__man-icon-background" />
+          <img src={accountImg} alt="мэн-задний-фон" className="account-link__man-icon-background" />
           <img src={manIcon} alt="мэн" className="account-link__man-icon" />
         </div>
       </div>
