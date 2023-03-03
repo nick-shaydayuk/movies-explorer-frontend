@@ -1,0 +1,83 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 14px;
+  height: 74px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 999;
+  box-sizing: border-box;
+  background: #fff;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+
+
+    @media (min-width: 768px) {
+      max-width: 768px;
+      padding: 0 70px;
+    }
+
+    @media (min-width: 1280px) {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 18px 0;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 18px 0;
+  }
+
+  &__container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    height: 100%;
+    align-items: center;
+  }
+
+  &__link-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 0 0 20px;
+
+    @media (min-width: 1280px) {
+      padding: 0 0 0 44px;
+    }
+
+    .account-link__container {
+      display: none;
+      @media (min-width: 769px) {
+        display: flex;
+      }
+    }
+  }
+
+  &__burger {
+    display: block;
+    width: 40px;
+    height: 54px;
+    background: transparent;
+    border: none;
+    background-image: url(../../images/burger.svg);
+    @media (min-width: 769px) {
+      display: none;
+    }
+  }
+}
+
+.header-type-landing {
+  background: #465dff;
+}

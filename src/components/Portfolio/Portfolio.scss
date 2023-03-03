@@ -1,0 +1,72 @@
+.portfolio {
+  padding: 0px 4px 70px 24px;
+  text-align: left;
+  @media (min-width: 768px) {
+    padding: 100px 70px 125px;
+  }
+
+  &__wrapper {
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+      max-width: 768px;
+    }
+    @media (min-width: 1280px) {
+      max-width: 1280px;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #a0a0a0;
+    margin-block: 0;
+    margin-bottom: 40px;
+  }
+
+  &__links {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block: 0;
+  }
+
+  &__link-item {
+    border-bottom: 1px solid;
+    padding-bottom: 18px;
+    border-color: #e8e8e8;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin: 0;
+      border: none;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    display: block;
+    font-size: 30px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    line-height: 50px;
+    letter-spacing: -0.004em;
+    background-image: url(../../images/portfolio-arrow.svg);
+    background-size: inherit;
+    background-repeat: no-repeat;
+    background-position: right;
+    color: #000;
+    transition: opacity 0.4s linear;
+
+    @media (min-width: 768px) {
+      font-size: 30px;
+      line-height: 50px;
+    }
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}

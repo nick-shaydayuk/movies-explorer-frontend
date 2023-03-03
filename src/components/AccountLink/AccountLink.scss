@@ -1,0 +1,42 @@
+.account-link {
+  &__text {
+    display: inline;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500;
+    transition: opacity 0.3s linear;
+  }
+
+  &:hover {
+    transition: opacity 0.3s linear;
+    opacity: 0.8;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 13px;
+  }
+
+  &__img-container {
+    position: relative;
+  }
+
+  &__man-icon-background {
+    height: 30px;
+    width: 30px;
+  }
+
+  &__man-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  &_active {
+    font-weight: 400;
+  }
+}
