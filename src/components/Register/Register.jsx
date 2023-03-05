@@ -1,10 +1,18 @@
 import './Register.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import useForm from '../../utils/useForm';
+import {
+  MESSAGE_VALIDATION_EMAIL,
+  MESSAGE_VALIDATION_NAME,
+  MESSAGE_VALIDATION_PASSWORD,
+} from '../../utils/consts';
 
-function Register() {
+function Register({ handleRegister, isInfoMessage }) {
+  const { values, errors, handleChange, isValid } = useForm();
   function onSubmit(e) {
     e.preventDefault();
+    handleRegister(values.name, values.Email, values.password);
   }
   return (
     <main>
@@ -22,10 +30,13 @@ function Register() {
                 type="text"
                 minLength="2"
                 maxLength="30"
+                onChange={handleChange}
+                value={values.name || ''}
+                pattern="^[A-Za-zа-яА-ЯёЁ0-9-\s]+$"
                 required
               />
               <span className="form-register__error">
-                Не знаем такого! Познакомимся?
+                {errors.name ? MESSAGE_VALIDATION_NAME : ''}
               </span>
             </label>
             <label className="form-register__label" htmlFor="Email">
@@ -35,10 +46,13 @@ function Register() {
                 name="Email"
                 className="form-register__input"
                 type="Email"
+                onChange={handleChange}
+                pattern="^(.+)@(.+)\.(.+)$"
+                value={values.Email || ''}
                 required
               />
               <span className="form-register__error">
-                Неправильный пароль или e-mail!
+                {errors.Email ? MESSAGE_VALIDATION_EMAIL : ''}
               </span>
             </label>
             <label className="form-register__label" htmlFor="password">
@@ -50,15 +64,24 @@ function Register() {
                 type="password"
                 minLength="2"
                 maxLength="20"
+                onChange={handleChange}
+                value={values.password || ''}
                 required
               />
               <span className="form-register__error">
-                Неправильный пароль или e-mail!
+                {errors.password ? MESSAGE_VALIDATION_PASSWORD : ''}
               </span>
             </label>
           </div>
           <div>
-            <button type="submit" className="form-register__submit">
+            <span className="form-register__error-serv">
+              {isInfoMessage ? isInfoMessage.message : ''}
+            </span>
+            <button
+              type="submit"
+              className="form-register__submit"
+              disabled={!isValid}
+            >
               Зарегистрироваться
             </button>
             <div>

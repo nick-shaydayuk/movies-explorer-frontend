@@ -1,11 +1,22 @@
 import './Login.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import useForm from '../../utils/useForm';
+import {
+  MESSAGE_VALIDATION_EMAIL,
+  MESSAGE_VALIDATION_PASSWORD,
+} from '../../utils/consts';
 
-function Login() {
+function Login({ handleLogin, isInfoMessage }) {
+  const { values, errors, handleChange, isValid } = useForm();
+
+  const currentPath = useLocation().pathname;
+
   function onSubmit(e) {
     e.preventDefault();
+    handleLogin(values.EmailLogin, values.password, currentPath);
   }
+
   return (
     <main>
       <section className="login-page">
@@ -20,10 +31,14 @@ function Login() {
                 name="Email"
                 className="form-login__input"
                 type="Email"
+                onChange={handleChange}
+                autoComplete="off"
+                pattern="^(.+)@(.+)\.(.+)$"
+                value={values.Email || ''}
                 required
               />
               <span className="form-login__error">
-                Неправильный пароль или e-mail!
+                {errors.EmailLogin ? MESSAGE_VALIDATION_EMAIL : ''}
               </span>
             </label>
             <label className="form-login__label" htmlFor="password">
@@ -35,15 +50,18 @@ function Login() {
                 type="password"
                 minLength="2"
                 maxLength="20"
+                onChange={handleChange}
+                value={values.password || ''}
                 required
               />
               <span className="form-login__error">
-                Неправильный пароль или e-mail!
+                {errors.password ? MESSAGE_VALIDATION_PASSWORD : ''}
               </span>
             </label>
           </div>
           <div>
-            <button type="submit" className="form-login__submit">
+          <span className="form-login__error-serv">{isInfoMessage ? isInfoMessage.message : ''}</span>
+            <button type="submit" className="form-login__submit" disabled={!isValid}>
               Войти
             </button>
             <div>
