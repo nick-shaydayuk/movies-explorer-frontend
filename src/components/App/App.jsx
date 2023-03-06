@@ -88,7 +88,8 @@ function App() {
     return movies.filter((movie) => movie.duration <= DURATION_SHORT);
   }
 
-  const getAllMovies = () =>
+  const getAllMovies = () => {
+    console.log(1);
     moviesApi
       .getMovies()
       .then((movies) => movies)
@@ -96,6 +97,7 @@ function App() {
         setIsError(true);
         renderInfoMessage(MESSAGE_FAILED_TO_FETCH);
       });
+  };
 
   const startPreloader = () => {
     setIsPreloader(true);

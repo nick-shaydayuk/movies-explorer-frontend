@@ -1,16 +1,54 @@
 import './SearchForm.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import search from '../../images/search.svg';
+import { useLocation } from 'react-router-dom';
+import useForm from '../../utils/useForm';
 
-function SearchForm() {
+function SearchForm({
+  searchMovies,
+  changeDuration,
+  isShort,
+  renderInfoMessage,
+}) {
+  const currentPath = useLocation().pathname;
   const [isChecked, setIsChecked] = useState(true);
+  const [shortSearch, setShortSearch] = useState(false);
+  const isSavedMovies = currentPath !== '/movies';
+
+  const {
+    values, handleChange, errors, setValues,
+  } = useForm();
+
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!values.search && !values.searchSavedMovies && !shortSearch) {
+      const error = true;
+      renderInfoMessage({ message: 'Введите ключевое слово' }, error);
+      return;
+    }
+    setShortSearch(!shortSearch);
+    searchMovies(
+      currentPath === '/movies' ? values.search : values.searchSavedMovies,
+      isSavedMovies
+    );
   }
 
+  useEffect(() => {
+    if (!isSavedMovies) {
+      const localSearch = localStorage.getItem('valueSearch');
+      if (localSearch) {
+        setValues({ search: localSearch });
+      }
+    }
+  }, []);
+
   function handleClick() {
+    if (!isSavedMovies && !values.search) {
+      return;
+    }
+    setShortSearch(true);
+    changeDuration(isSavedMovies);
     setIsChecked(!isChecked);
-    console.log('cheked');
   }
   return (
     <div className="search-form">
@@ -22,7 +60,13 @@ function SearchForm() {
               type="text"
               className="search-form__input"
               placeholder="Фильм"
-              required
+              name={currentPath === '/movies' ? 'search' : 'searchSavedMovies'}
+              value={
+                currentPath === '/movies'
+                  ? values.search || ''
+                  : values.searchSavedMovies || ''
+              }
+              onChange={handleChange}
             />
           </div>
           <div className="search-form__button-container">
