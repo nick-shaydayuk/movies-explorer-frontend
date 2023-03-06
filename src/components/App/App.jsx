@@ -9,7 +9,7 @@ import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import Profile from '../Profile/Profile';
-import MovieView from '../Movies/MoviesView';
+import MoviesView from '../Movies/MoviesView';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
@@ -168,7 +168,7 @@ function App() {
     clearAllData();
     exitUserProfile()
       .catch((err) => {
-        localStorage.setItem('serverFailure', true);
+        /* localStorage.setItem('serverFailure', true); */
         setIsError(true);
         setIsInfoMessage(alertErrorMessage(err));
         openPopup();
@@ -189,7 +189,7 @@ function App() {
           setIsError(true);
           setIsInfoMessage(alertErrorMessage(err));
           clearAllData();
-          localStorage.setItem('serverFailure', true);
+          /* localStorage.setItem('serverFailure', true); */
           openPopup();
         });
     }
@@ -239,10 +239,14 @@ function App() {
     startPreloader();
     authorize(email, password)
       .then(() => {
+        console.log(1, isLogin);
         setIsLogin(true);
-        localStorage.removeItem('serverFailure');
+        console.log(2, isLogin);
+        /* localStorage.removeItem('serverFailure'); */
         localStorage.setItem('isLogin', true);
+        console.log(3, localStorage.isLogin);
         path('/movies');
+        console.log(4);
       })
       .catch((err) => {
         setIsError(true);
@@ -430,7 +434,7 @@ function App() {
             <Route
               path="/movies"
               element={
-                <MovieView
+                <MoviesView
                   isLogin={isLogin}
                   searchedMovies={cardMoviesDisplay}
                   searchMovies={handleSearchMovies}

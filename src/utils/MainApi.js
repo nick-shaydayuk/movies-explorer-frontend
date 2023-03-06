@@ -18,6 +18,7 @@ class MainApi {
 
   async getUserData() {
     const res = await fetch(this._userUrl, {
+      credentials: 'include',
       headers: this._headers,
     });
     return MainApi._checkResponse(res);
@@ -69,6 +70,7 @@ class MainApi {
 
   async getClientMovies() {
     const res = await fetch(this._moviesUrl, {
+      credentials: 'include',
       headers: this._headers,
     });
     return MainApi._checkResponse(res);

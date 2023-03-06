@@ -14,7 +14,7 @@ function Login({ handleLogin, isInfoMessage }) {
 
   function onSubmit(e) {
     e.preventDefault();
-    handleLogin(values.EmailLogin, values.password, currentPath);
+    handleLogin(values.Email, values.password, currentPath);
   }
 
   return (

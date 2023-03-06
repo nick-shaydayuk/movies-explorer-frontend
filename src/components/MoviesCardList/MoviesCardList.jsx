@@ -1,128 +1,43 @@
 import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
-import cardPath from '../../images/movie.png';
+import useStartSet from '../../utils/useStartSet';
+import useScreenWidth from '../../utils/useWidthScreen';
+import { useState, useEffect } from 'react';
 
-function MovieCardList() {
+function MovieCardList({
+  searchedMovies,
+  saveMovie,
+  deleteMovie,
+  allSavedMovies,
+}) {
   const currentPath = useLocation().pathname;
-  const movieCardsTest = [
-    {
-      id: 0,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '1ч42м',
-    },
-    {
-      id: 1,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч08м',
-    },
-    {
-      id: 2,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 3,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 4,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 5,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 6,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 7,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 8,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 9,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 10,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 11,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 12,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 13,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 14,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 15,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-  ];
-  function handleMovie(evt) {
-    console.log(evt);
+
+  const widthScreen = useScreenWidth();
+  const startSet = useStartSet(widthScreen);
+  const [count, setCount] = useState(0);
+  const [startMovies, setStartMovies] = useState([]);
+
+  useEffect(() => {
+    if (currentPath === '/movies') {
+      const start = 0;
+      const end = startSet.start;
+      setStartMovies(searchedMovies.slice(start, end));
+      setCount(end);
+    }
+  }, [searchedMovies]);
+
+  function handleMovie() {
+    setStartMovies([
+      ...startMovies,
+      ...searchedMovies.slice(count, count + startSet.step),
+    ]);
+    setCount(count + startSet.step);
   }
-  return (
-    <>
-      <ul
-        className={`card-list ${
-          currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
-        }`}
-      >
-        {movieCardsTest.map((movieCard) => (
-          <MovieCard
-            key={movieCard.id}
-            cardPath={cardPath}
-            title={movieCard.title}
-            duracion={movieCard.duration}
-          />
-        ))}
-      </ul>
-      {currentPath === '/movies' && (
+
+  function moreButton() {
+    if (searchedMovies.length > count) {
+      return (
         <button
           type="button"
           aria-label="Кнопка ещё"
@@ -131,7 +46,40 @@ function MovieCardList() {
         >
           Ещё
         </button>
-      )}
+      );
+    }
+    return '';
+  }
+
+  return (
+    <>
+      <ul
+        className={`card-list ${
+          currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
+        }`}
+      >
+        {currentPath === '/movies'
+          ? startMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard.id}
+                card={movieCard}
+                saveMovie={saveMovie}
+                deleteMovie={deleteMovie}
+                allSavedMovies={allSavedMovies}
+              />
+            ))
+          : searchedMovies.map((movieCard) => (
+              <MovieCard
+                key={movieCard._id || movieCard.id}
+                deleteMovie={deleteMovie}
+                card={movieCard}
+              />
+            ))}
+      </ul>
+      <p className="card-list__not-found">
+        {searchedMovies.length === 0 ? 'Ничего не найдено.' : ''}
+      </p>
+      {currentPath === '/movies' ? moreButton() : null}
     </>
   );
 }

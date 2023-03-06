@@ -6,7 +6,6 @@ export default function useForm() {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
-    console.log(e.target.name)
     const input = e.target;
     const { value, name } = e.target;
     setValues({ ...values, [name]: value });

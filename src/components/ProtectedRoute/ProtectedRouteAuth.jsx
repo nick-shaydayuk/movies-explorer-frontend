@@ -1,10 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
 function ProtectedRouteAuth({ isLogin }) {
-  if (isLogin) {
-    return <Navigate to="/" />;
-  }
-  return <Outlet />;
+  return isLogin ? <Navigate to="/" /> : <Outlet />;
 }
 
 export default ProtectedRouteAuth;

@@ -6,16 +6,16 @@ class MoviesApi {
     this._headers = headers;
   }
 
-  getMovies() {
-    return fetch(this._moviesUrl, {
+  async getMovies() {
+    const res = await fetch(this._moviesUrl, {
       method: 'GET',
+      credentials: 'include',
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(new Error(`Ошибка: ${res.status}`));
     });
+    if (res.ok) {
+      return res.json();
+    }
+    return await Promise.reject(new Error(`Ошибка: ${res.status}`));
   }
 }
 
