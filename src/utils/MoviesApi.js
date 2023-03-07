@@ -7,10 +7,8 @@ class MoviesApi {
   }
 
   async getMovies() {
-    console.log(1);
     const res = await fetch(this._moviesUrl, {
       method: 'GET',
-      credentials: 'include',
       headers: this._headers,
     });
     if (res.ok) {

@@ -36,33 +36,28 @@ class MainApi {
     return MainApi._checkResponse(res);
   }
 
-  async saveClientMovie({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    nameRU,
-    nameEN,
-    id,
-  }) {
+  async saveClientMovie(card, owner) {
+    console.log(card);
     const res = await fetch(this._moviesUrl, {
       method: 'POST',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image: `${this._baseMoviesUrl}/${image.url}`,
-        trailerLink,
-        nameRU,
-        nameEN,
-        thumbnail: `${this._baseMoviesUrl}/${image.formats.thumbnail.url}`,
-        movieId: id,
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: `${this._baseMoviesUrl}/${card.image.url}`,
+        trailerLink: card.trailerLink,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
+        thumbnail: `${this._baseMoviesUrl}/${card.image.formats.thumbnail.url}`,
+        movieId: card.id,
+        owner: {
+          email: owner.email,
+          name: owner.name,
+        },
       }),
     });
     return MainApi._checkResponse(res);
@@ -70,8 +65,8 @@ class MainApi {
 
   async getClientMovies() {
     const res = await fetch(this._moviesUrl, {
-      credentials: 'include',
       headers: this._headers,
+      credentials: 'include',
     });
     return MainApi._checkResponse(res);
   }
@@ -80,6 +75,7 @@ class MainApi {
     const res = await fetch(`${this._moviesUrl}/${_id}`, {
       method: 'DELETE',
       headers: this._headers,
+      credentials: 'include',
     });
     return MainApi._checkResponse(res);
   }

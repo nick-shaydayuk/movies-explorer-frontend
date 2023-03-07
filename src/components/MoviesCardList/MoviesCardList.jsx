@@ -70,10 +70,10 @@ function MovieCardList({
             ))
           : searchedMovies.map((movieCard) => (
               <MovieCard
-                key={movieCard._id || movieCard.id}
+                key={movieCard._id || movieCard.id || movieCard}
                 deleteMovie={deleteMovie}
                 card={movieCard}
-              />
+              >${movieCard}</MovieCard>
             ))}
       </ul>
       <p className="card-list__not-found">

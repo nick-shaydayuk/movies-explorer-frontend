@@ -88,15 +88,15 @@ function App() {
     return movies.filter((movie) => movie.duration <= DURATION_SHORT);
   }
 
-  const getAllMovies = () => {
-    console.log(1);
-    moviesApi
-      .getMovies()
-      .then((movies) => movies)
-      .catch(() => {
-        setIsError(true);
-        renderInfoMessage(MESSAGE_FAILED_TO_FETCH);
-      });
+  const getAllMovies = async () => {
+    try {
+      const movies = await moviesApi
+        .getMovies();
+      return movies;
+    } catch {
+      setIsError(true);
+      renderInfoMessage(MESSAGE_FAILED_TO_FETCH);
+    }
   };
 
   const startPreloader = () => {
@@ -216,6 +216,12 @@ function App() {
     }
   }, [isLogin]);
 
+  React.useEffect(() => {
+    moviesApi.getMovies().then((res) => {
+      setCardMoviesDisplay(res);
+    })
+  }, [])
+
   const handleSearchMovies = (valueSearch) => {
     if (!localStorage.allMovies) {
       getAllMovies()
@@ -314,7 +320,7 @@ function App() {
   const saveMovie = (card) => {
     startPreloader();
     mainApi
-      .saveClientMovie(card)
+      .saveClientMovie(card, currentUser)
       .then((res) => {
         saveLocalStorage(res);
       })

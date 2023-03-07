@@ -1,15 +1,20 @@
-import { useState } from 'react';
 import './MovieCardButton.scss';
 
-function MovieCardButton() {
-  const [isLike, setIsLike] = useState(false);
+function MovieCardButton({
+  card, saveMovie, deleteMovie, isLiked,
+}) {
 
-  function handleClick() {
-    setIsLike(!isLike);
+
+  const handleClick = () => {
+    if (!isLiked) {
+      saveMovie(card);
+      return;
+    }
+    deleteMovie(card);
   }
   return (
     <button
-      className={`movie-button ${isLike ? 'movie-button_like' : ''}`}
+      className={`movie-button ${isLiked ? 'movie-button_like' : ''}`}
       type="button"
       aria-label="Выбрать Фильм"
       onClick={handleClick}
