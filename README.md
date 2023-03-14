@@ -1,5 +1,4 @@
-Ссылка на макет https://www.figma.com/file/qG52sQBAbmEfJg6WDH9RNk/Diploma-(Copy)?node-id=891%3A3857&t=C6hQZzJAhKm03bvb-1
-или вот тут: https://disk.yandex.ru/d/z9EFcumd8YaomQ
+Ссылка на макет https://www.figma.com/file/XrtCkQ6ICIM8H7Un7fYrrF/Diploma-(Copy)?node-id=891%3A3857&t=o7MnDS9ryG0nPYEI-1
 
 # Getting Started with Create React App
 

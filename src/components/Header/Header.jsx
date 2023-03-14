@@ -23,7 +23,7 @@ function Header({ isLogin }) {
       <div className="header__content">
         <Logo />
         <div className="header__container">
-          {true ? (
+          {isLogin ? (
             <div className="header__link-container">
               <Navigation />
               <AccountLink />
