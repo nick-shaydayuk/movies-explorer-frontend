@@ -17,7 +17,7 @@
   &__form {
     width: 100%;
     margin: 0 0 10px;
-    padding-bottom: 70px;
+    padding-bottom: 10px;
     @media (min-width: 768px) {
       border-bottom: 1px solid #e8e8e8;
     }
@@ -29,14 +29,27 @@
   }
 
   &__button-container {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-    width: calc(100% + 30px);
-    box-sizing: border-box;
+    display: none;
+
     @media (min-width: 768px) {
+      display: flex;
       flex-direction: row;
       justify-content: flex-end;
+      box-sizing: border-box;
+    }
+
+    &_mobile {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 45px 0 37px;
+      border-bottom: 1px solid #E8E8E8;
+
+      @media (min-width: 768px) {
+        display: none;
+      }
     }
   }
 
@@ -77,18 +90,13 @@
   }
 
   &__submit {
-    width: 80px;
     height: 34px;
     border-radius: 34px;
-    font-size: 11px;
-    line-height: 18px;
-    font-weight: 500;
-    background: #ff6838;
-    color: #fff;
     border: none;
     cursor: pointer;
     transition: opacity 0.3s linear;
     box-sizing: border-box;
+    padding: 0;
 
     @media (min-width: 768px) {
       margin-right: 30px;
@@ -105,7 +113,6 @@
   }
 
   &__submit-icon {
-    filter: brightness(2);
     width: 34px;
     height: 34px;
   }

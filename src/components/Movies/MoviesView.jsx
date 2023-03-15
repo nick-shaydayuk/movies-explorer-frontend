@@ -1,4 +1,4 @@
-import './MoviesView.scss'
+import './MoviesView.scss';
 import Header from '../Header/Header';
 import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
@@ -6,16 +6,18 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function MoviesView({ isLogin }) {
   return (
-    <section className="movies">
-      <Header
-        isLogin={isLogin}
-      />
+    <>
+      <Header isLogin={isLogin} />
+
       <main className="main">
-        <SearchForm />
-        <MoviesCardList />
+        <section className="movies">
+          <SearchForm />
+          <MoviesCardList />
+        </section>
       </main>
+
       <Footer />
-    </section>
+    </>
   );
 }
 

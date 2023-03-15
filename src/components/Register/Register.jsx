@@ -1,8 +1,12 @@
 import './Register.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import { useState } from 'react';
 
 function Register() {
+
+  const [isValid, setIsValid] = useState(true)
+
   function onSubmit(e) {
     e.preventDefault();
   }
@@ -24,37 +28,46 @@ function Register() {
                 maxLength="30"
                 required
               />
-              <span className="form-register__error">
-                Не знаем такого! Познакомимся?
-              </span>
             </label>
             <label className="form-register__label" htmlFor="Email">
               Email
               <input
                 id="Email"
                 name="Email"
-                className="form-register__input"
+                className={`form-register__input ${
+                  isValid ? 'form-register__input_invalid' : ''
+                }`}
                 type="Email"
                 required
               />
-              <span className="form-register__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {isValid ? (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              ) : (
+                <></>
+              )}
             </label>
             <label className="form-register__label" htmlFor="password">
               Пароль
               <input
                 id="password"
                 name="password"
-                className="form-register__input"
+                className={`form-register__input ${
+                  isValid ? 'form-register__input_invalid' : ''
+                }`}
                 type="password"
                 minLength="2"
                 maxLength="20"
                 required
               />
-              <span className="form-register__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {isValid ? (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              ) : (
+                <></>
+              )}
             </label>
           </div>
           <div>

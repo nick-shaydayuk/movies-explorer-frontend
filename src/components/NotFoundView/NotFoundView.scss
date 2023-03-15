@@ -2,29 +2,48 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   height: 100vh;
-  padding-top: 20%;
   box-sizing: border-box;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 60%;
+  }
 
   &__title {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 400;
-    font-size: 140px;
-    line-height: 169px;
+    font-size: 80px;
+    line-height: 97px;
     text-align: center;
     color: #000000;
     display: inline-block;
+    margin: 0 0 10px;
+
+    @media (min-width: 768px) {
+      font-size: 140px;
+      line-height: 169px;
+      margin-bottom: 5px;
+    }
   }
 
   &__text {
-    font-size: 16px;
-    line-height: 19.36px;
+    font-size: 12px;
+    line-height: 15px;
     margin: 0;
     text-align: center;
     margin-block-start: 0;
     margin-block-end: 0;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+      line-height: 19px;
+    }
   }
 
   &__button {
@@ -37,7 +56,8 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    color: #ff6838;
+    color: #3456F3;
+    text-decoration: none;
 
     @media (max-width: 940px) {
       margin-bottom: 42px;

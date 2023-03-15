@@ -43,7 +43,7 @@
     font-size: 12px;
     line-height: 15px;
     font-weight: 400;
-    color: #ff6838;
+    color: #3456F3;
     text-decoration: none;
     display: inline-block;
     margin-left: 6px;
@@ -85,27 +85,40 @@
   }
 
   &__input {
-    margin: 10px 0 10px;
+    margin: 5px 0 6px;
     width: 100%;
     font-size: 13px;
     line-height: 16px;
     font-weight: 400;
-    height: 46px;
     border: none;
-    border-radius: 8px;
-    background: #f9f9f9;
-    padding: 0 15px;
+    border-bottom: 1px solid #E8E8E8;
+    background: #fff;
+    padding: 0;
     box-sizing: border-box;
     max-width: 260px;
+    padding-bottom: 4px;
+
+    &:focus {
+      border-color: #3456F3;
+    }
+
+    &:focus-visible {
+      border-color: #3456F3;
+      outline: none;
+    }
 
     @media (min-width: 768px) {
       max-width: 396px;
+    }
+
+    &_invalid {
+      color: #ff4062;
     }
   }
 
   &__submit {
     width: 100%;
-    background: #ff6838;
+    background: #3456F3;
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;

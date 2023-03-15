@@ -3,7 +3,7 @@
   text-align: left;
 
   @media (min-width: 768px) {
-    padding: 110px 70px;
+    padding: 110px 50px;
   }
 
   &__wrapper {
@@ -11,16 +11,17 @@
     width: 100%;
     margin: 0 auto;
     @media (min-width: 768px) {
-      max-width: 768px;
+      max-width: 668px;
+      margin: 0 auto;
     }
     @media (min-width: 1280px) {
-      max-width: 1280px;
+      max-width: 1140px;
     }
   }
 
   &__title {
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: 400;
     border-bottom: 1px solid #000;
     padding-bottom: 23px;
@@ -28,6 +29,10 @@
     margin-block: 0;
     margin: 0 0 60px;
 
+    @media (min-width: 768px) {
+      font-size: 22px;
+      line-height: 27px;
+    }
   }
 
   &__container {
@@ -39,29 +44,42 @@
     @media (min-width: 768px) {
       margin-bottom: 110px;
       flex-direction: row;
+      gap: 30px;
     }
   }
 
   &__project {
     max-width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   &__project-title {
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: 400;
     margin-block: 0;
-    margin-bottom: 26px;
     letter-spacing: -0.04em;
     color: #000;
   }
 
   &__project-text {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 16px;
     font-weight: 400;
     color: #000;
     margin-block: 0;
+
+    @media (min-width: 768px) {
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 
   &__container-duration {
@@ -71,7 +89,7 @@
 
   &__front-end-duration {
     text-align: center;
-    grid-column: 2/5;;
+    grid-column: 2/5;
   }
 
   &__back-end-duration {
@@ -80,24 +98,29 @@
   }
 
   &__time {
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 11px;
+    line-height: 16px;
     min-height: 36px;
     margin-block: 0;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f2f2f2;
 
     &_type_colored {
-      background-color: #2BE080;
+      background-color: #2be080;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 14px;
+      line-height: 17px;
     }
   }
 
   &__process {
-    font-size: 14px;
-    line-height: 17px;
+    font-size: 11px;
+    line-height: 16px;
     font-weight: 500;
     color: #a0a0a0;
     margin-block: 0;

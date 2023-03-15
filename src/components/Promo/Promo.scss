@@ -3,10 +3,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-
   width: 100%;
-
-  margin-top: 80px;
+  margin-top: 75px;
   padding: 0 14px;
   box-sizing: border-box;
   border-radius: 10px;
@@ -26,12 +24,16 @@
     justify-content: space-between;
     border-radius: 10px;
     background-color: #F5F5F5;
+    width: 100%;
     min-height: 590px;
+    max-width: 292px;
+    margin: 0 auto;
+    box-sizing: border-box;
     @media (min-width: 768px) {
-      max-width: 768px;
+      max-width: 728px;
     }
     @media (min-width: 1280px) {
-      max-width: 1280px;
+      max-width: 1200px;
     }
   }
 
@@ -63,18 +65,21 @@
     position: relative;
     z-index: 2;
     font-weight: 400;
-    font-size: 31px;
-    line-height: 39px;
+    font-size: 29px;
+    line-height: 37px;
+    width: 292px;
 
     @media (min-width: 768px) {
-      width: 730px;
-      font-size: 50px;
-      line-height: 58px;
+      width: 680px;
+      font-size: 40px;
+      line-height: 52px;
       padding-top: 205px;
     }
 
     @media (min-width: 1024px) {
-      width: 665px;
+      width: 730px;
+      font-size: 50px;
+      line-height: 58px;
     }
 
     &:hover {
@@ -98,6 +103,9 @@
     gap: 6px;
     justify-content: center;
     align-items: center;
+    @media (min-width: 768px) {
+      gap: 10px;
+    }
   }
 
   &__link {
@@ -114,5 +122,10 @@
     background: #E8E8E8;
     border-radius: 6px;
     max-width: 82px;
+    @media (min-width: 768px) {
+      max-width: 96px;
+      padding: 10px 17px;
+      border-radius: 10px;
+    }
   }
 }

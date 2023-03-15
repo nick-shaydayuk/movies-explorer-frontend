@@ -18,28 +18,40 @@ function Login() {
               <input
                 id="Email"
                 name="Email"
-                className="form-login__input"
+                className={`form-login__input ${
+                  true ? 'form-login__input_invalid' : ''
+                }`}
                 type="Email"
                 required
               />
-              <span className="form-login__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {true ? (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              ) : (
+                <></>
+              )}
             </label>
             <label className="form-login__label" htmlFor="password">
               Пароль
               <input
                 id="password"
                 name="password"
-                className="form-login__input"
+                className={`form-login__input ${
+                  true ? 'form-login__input_invalid' : ''
+                }`}
                 type="password"
                 minLength="2"
                 maxLength="20"
                 required
               />
-              <span className="form-login__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {true ? (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              ) : (
+                <></>
+              )}
             </label>
           </div>
           <div>

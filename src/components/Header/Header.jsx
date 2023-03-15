@@ -8,8 +8,6 @@ import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
 
 function Header({ isLogin }) {
-  const actualPath = useLocation().pathname;
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const closeMenu = () => {
@@ -17,9 +15,7 @@ function Header({ isLogin }) {
   };
 
   return (
-    <header
-      className={`header ${actualPath === '/' ? 'header-type-landing' : ''}`}
-    >
+    <header className="header">
       <div className="header__content">
         <Logo />
         <div className="header__container">
@@ -36,7 +32,6 @@ function Header({ isLogin }) {
             <AuthNavigation />
           )}
         </div>
-
         {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
       </div>
     </header>
