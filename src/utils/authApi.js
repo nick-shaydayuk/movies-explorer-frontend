@@ -1,5 +1,4 @@
-import { URL_AUTH } from './consts';
-import { URL_MOVIES } from './consts';
+import { URL_AUTH, URL_MOVIES } from './consts';
 
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);

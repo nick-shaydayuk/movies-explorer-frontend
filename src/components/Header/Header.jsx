@@ -1,5 +1,4 @@
 import './Header.scss';
-import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -9,10 +8,6 @@ import MobileMenu from '../MobileMenu/MobileMenu';
 
 function Header({ isLogin }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
 
   return (
     <header className="header">
@@ -32,7 +27,7 @@ function Header({ isLogin }) {
             <AuthNavigation />
           )}
         </div>
-        {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
+        {isMenuOpen ? <MobileMenu closeMenu={() => setIsMenuOpen(false)} /> : <></>}
       </div>
     </header>
   );

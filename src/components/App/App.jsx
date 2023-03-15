@@ -9,25 +9,29 @@ import NotFoundView from '../NotFoundView/NotFoundView';
 import Profile from '../Profile/Profile';
 import MoviesView from '../Movies/MoviesView';
 import { useState } from 'react';
-import SavedMovies from '../SavedMovies/SavedMovies'
-
-//const history = useNavigate();
+import SavedMovies from '../SavedMovies/SavedMovies';
+import { signin, signup } from '../../utils/authApi';
 
 function App() {
-  const path = useNavigate();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
-  const handleLogin = () => {
-    setIsLogin(true);
-    path('/movies');
+
+  const handleLogin = (email, password) => {
+    signin(email, password).then(() => {
+      setIsLogin(true);
+      navigate('/movies');
+    });
   };
 
-  const handleRegister = () => {
-    path('/signin');
+  const handleRegister = (name, email, password) => {
+    signup(name, email, password).then(() => {
+      handleLogin(email, password);
+    });
   };
 
   const signOut = () => {
     setIsLogin(false);
-    path('/');
+    navigate('/');
   };
 
   return (
