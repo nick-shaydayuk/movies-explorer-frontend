@@ -10,23 +10,38 @@ import Profile from '../Profile/Profile';
 import MoviesView from '../Movies/MoviesView';
 import { useState } from 'react';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { signin, signup } from '../../utils/authApi';
+import { login, signup } from '../../utils/authApi';
 
 function App() {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(false);
+  const [isRegisterValid, setIsRegisterValid] = useState(true);
+  const [isLoginValid, setIsLoginValid] = useState(true);
 
   const handleLogin = (email, password) => {
-    signin(email, password).then(() => {
-      setIsLogin(true);
-      navigate('/movies');
-    });
+    login(email, password)
+      .then(() => {
+        setIsLogin(true);
+        setIsLoginValid(true);
+        navigate('/movies');
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoginValid(false);
+      });
   };
 
   const handleRegister = (name, email, password) => {
-    signup(name, email, password).then(() => {
-      handleLogin(email, password);
-    });
+    signup(name, email, password)
+      .then((res) => {
+        if (!res.ok) return
+        handleLogin(res.email, password);
+        setIsRegisterValid(true)
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsRegisterValid(false);
+      });
   };
 
   const signOut = () => {
@@ -47,10 +62,15 @@ function App() {
             </>
           }
         />
-        <Route path="/signin" element={<Login handleLogin={handleLogin} />} />
+        <Route
+          path="/signin"
+          element={<Login handleLogin={handleLogin} isValid={isLoginValid} />}
+        />
         <Route
           path="/signup"
-          element={<Register handleRegister={handleRegister} />}
+          element={
+            <Register handleRegister={handleRegister} isValid={isRegisterValid} />
+          }
         />
         <Route
           path="/profile"

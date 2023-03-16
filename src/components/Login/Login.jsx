@@ -1,10 +1,19 @@
 import './Login.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import { useRef } from 'react';
 
-function Login() {
+function Login({ handleLogin, isValid }) {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   function onSubmit(e) {
     e.preventDefault();
+    handleLogin(
+      emailRef.current.value,
+      passwordRef.current.value
+    )
   }
   return (
     <main>
@@ -19,17 +28,18 @@ function Login() {
                 id="Email"
                 name="Email"
                 className={`form-login__input ${
-                  true ? 'form-login__input_invalid' : ''
+                  isValid ? '' : 'form-login__input_invalid'
                 }`}
                 type="Email"
+                ref={emailRef}
                 required
               />
-              {true ? (
+              {isValid ? (
+                <></>
+              ) : (
                 <span className="form-register__error">
                   Что-то пошло не так...
                 </span>
-              ) : (
-                <></>
               )}
             </label>
             <label className="form-login__label" htmlFor="password">
@@ -38,19 +48,20 @@ function Login() {
                 id="password"
                 name="password"
                 className={`form-login__input ${
-                  true ? 'form-login__input_invalid' : ''
+                  isValid ? '' : 'form-login__input_invalid'
                 }`}
                 type="password"
                 minLength="2"
                 maxLength="20"
+                ref={passwordRef}
                 required
               />
-              {true ? (
+              {isValid ? (
+                <></>
+              ) : (
                 <span className="form-register__error">
                   Что-то пошло не так...
                 </span>
-              ) : (
-                <></>
               )}
             </label>
           </div>

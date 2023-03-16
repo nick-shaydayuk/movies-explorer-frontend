@@ -4,19 +4,19 @@ export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
 }
 
-export const signup = async (email, password) => {
+export const signup = async (name, email, password) => {
   const res = await fetch(`${URL_AUTH}/signup`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ name, email, password }),
   });
   return checkResponse(res);
 };
 
-export const login = async ({ email, password }) => {
+export const login = async (email, password) => {
   const res = await fetch(`${URL_AUTH}/signin`, {
     method: 'POST',
     headers: {
@@ -52,7 +52,7 @@ export const getMyData = async () => {
   return checkResponse(res);
 };
 
-export const changeMyData = async () => {
+export const changeMyData = async ({ email, name }) => {
   const res = await fetch(`${URL_AUTH}/users/me`, {
     method: 'PATCH',
     headers: {
@@ -77,7 +77,19 @@ export const loadMyMovies = async () => {
   return checkResponse(res);
 };
 
-export const addMovie = async () => {
+export const addMovie = async ({
+  country,
+  director,
+  duration,
+  year,
+  description,
+  image,
+  trailerLink,
+  owner,
+  movieId,
+  nameRU,
+  nameEN,
+}) => {
   const res = await fetch(`${URL_AUTH}/movies`, {
     method: 'POST',
     headers: {
@@ -97,14 +109,14 @@ export const addMovie = async () => {
       owner,
       movieId,
       nameRU,
-      nameEN
+      nameEN,
     }),
   });
   return checkResponse(res);
 };
 
 export const removeMovie = async (_id) => {
-  const res = await fetch(`${URL_AUTH}/movies/${id}`, {
+  const res = await fetch(`${URL_AUTH}/movies/${_id}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -113,4 +125,4 @@ export const removeMovie = async (_id) => {
     credentials: 'include',
   });
   return checkResponse(res);
-}
+};

@@ -1,14 +1,20 @@
 import './Register.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import { useState } from 'react';
+import { useRef } from 'react';
 
-function Register() {
-
-  const [isValid, setIsValid] = useState(true)
+function Register({ handleRegister, isValid }) {
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   function onSubmit(e) {
     e.preventDefault();
+    handleRegister(
+      nameRef.current.value,
+      emailRef.current.value,
+      passwordRef.current.value
+    );
   }
   return (
     <main>
@@ -26,6 +32,7 @@ function Register() {
                 type="text"
                 minLength="2"
                 maxLength="30"
+                ref={nameRef}
                 required
               />
             </label>
@@ -35,17 +42,18 @@ function Register() {
                 id="Email"
                 name="Email"
                 className={`form-register__input ${
-                  isValid ? 'form-register__input_invalid' : ''
+                  isValid ? '' : 'form-register__input_invalid'
                 }`}
                 type="Email"
+                ref={emailRef}
                 required
               />
               {isValid ? (
+                <></>
+              ) : (
                 <span className="form-register__error">
                   Что-то пошло не так...
                 </span>
-              ) : (
-                <></>
               )}
             </label>
             <label className="form-register__label" htmlFor="password">
@@ -54,19 +62,20 @@ function Register() {
                 id="password"
                 name="password"
                 className={`form-register__input ${
-                  isValid ? 'form-register__input_invalid' : ''
+                  isValid ? '' : 'form-register__input_invalid'
                 }`}
                 type="password"
                 minLength="2"
                 maxLength="20"
+                ref={passwordRef}
                 required
               />
               {isValid ? (
+                <></>
+              ) : (
                 <span className="form-register__error">
                   Что-то пошло не так...
                 </span>
-              ) : (
-                <></>
               )}
             </label>
           </div>

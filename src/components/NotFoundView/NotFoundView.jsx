@@ -2,10 +2,6 @@ import './NotFoundView.scss';
 import { Link } from 'react-router-dom';
 
 function NotFoundView() {
-  /* function buttonClick(e) {
-    e.preventDefault();
-    console.log('назад');
-  } */
   return (
     <section className="not-found-view">
       <div className="not-found-view__container">
