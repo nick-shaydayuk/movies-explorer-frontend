@@ -4,15 +4,14 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function MoviesView({ isLogin }) {
+function MoviesView({ isLogin, movies }) {
   return (
     <>
       <Header isLogin={isLogin} />
-
       <main className="main">
         <section className="movies">
           <SearchForm />
-          <MoviesCardList />
+          <MoviesCardList movies={movies} />
         </section>
       </main>
 
