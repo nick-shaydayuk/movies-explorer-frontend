@@ -18,9 +18,10 @@ function MovieCardList({ movies }) {
         {movies.map((movieCard) => (
           <MovieCard
             key={movieCard.id}
-            cardPath={movieCard.image.previewUrl}
+            cardPath={movieCard.image.url}
             title={movieCard.title}
             duracion={movieCard.duration}
+            movieCard={movieCard}
           />
         ))}
       </ul>

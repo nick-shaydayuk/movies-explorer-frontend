@@ -1,9 +1,20 @@
 import './MovieCard.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCardButton from '../MovieCardButton/MovieCardButton';
+import { URL_MOVIES } from '../../utils/consts';
 
-function MovieCard({ cardPath, title, duracion }) {
-  const currentPath = useLocation().pathname;
+function MovieCard({ cardPath, duracion, movieCard }) {
+  const actualPath = useLocation().pathname;
+
+  console.log(movieCard);
+
+  function getImageUrl() {
+    if (movieCard.id) {
+      return `${URL_MOVIES}/${cardPath}`;
+    }
+    return movieCard.image;
+  }
+
   function handleClick(evt) {
     console.log(evt);
   }
@@ -13,16 +24,16 @@ function MovieCard({ cardPath, title, duracion }) {
         <figure className="movie-card__card">
           <img
             className="movie-card__image"
-            src={cardPath}
-            alt="333"
+            src={actualPath === '/movies' ? `${URL_MOVIES}/${movieCard.image.url}` : getImageUrl()}
+            alt={movieCard.nameRU}
           />
           <figcaption className="movie-card__info">
             <div className="movie-card__title-wrapper">
-              <h2 className="movie-card__title">{title}</h2>
+              <h2 className="movie-card__title">{movieCard.nameRU}</h2>
               <p className="movie-card__duration">{duracion}</p>
             </div>
 
-            {currentPath === '/saved-movies'
+            {actualPath === '/saved-movies'
               ? (
                 <button
                   type="button"

@@ -59,6 +59,10 @@ function App() {
     loadMovies().then((res) => {
       setMovies(res);
     });
+    getMyData().then((res) => {
+      console.log(res);
+      setCurrentUser(res.data)
+    })
   }, [isLogin]);
 
   useEffect(() => {
@@ -66,15 +70,8 @@ function App() {
     loadMovies().then((res) => {
       setMovies(res);
     });
-  }, []);
 
-  useEffect(() => {
-    if (!isLogin) return
-    getMyData().then((res) => {
-      console.log(res);
-      setCurrentUser(res)
-    })
-  })
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
