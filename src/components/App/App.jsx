@@ -60,17 +60,16 @@ function App() {
       setMovies(res);
     });
     getMyData().then((res) => {
-      console.log(res);
-      setCurrentUser(res.data)
-    })
+      setCurrentUser(res.data);
+    });
   }, [isLogin]);
 
   useEffect(() => {
-    if (!isLogin) return;
+    if (!localStorage.getItem('isLogin')) return;
+    setIsLogin(true);
     loadMovies().then((res) => {
       setMovies(res);
     });
-
   }, []);
 
   return (
