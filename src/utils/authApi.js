@@ -53,7 +53,7 @@ export const getMyData = async () => {
   return checkResponse(res);
 };
 
-export const changeMyData = async ({ email, name }) => {
+export const changeMyData = async (email, name) => {
   const res = await fetch(`${URL_AUTH}/users/me`, {
     method: 'PATCH',
     headers: {
