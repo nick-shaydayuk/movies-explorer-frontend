@@ -2,20 +2,21 @@ import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
 
-function MovieCardList({ movies }) {
-  const currentPath = useLocation().pathname;
+function MovieCardList({ movies, selectedMovies }) {
+  const actualPath = useLocation().pathname;
 
-  function handleMovie(evt) {
+  function handleMoreMovies(evt) {
     console.log(evt);
   }
+
   return (
     <>
       <ul
         className={`card-list ${
-          currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
+          actualPath === '/saved-movies' ? 'card-list_saved-movies' : ''
         }`}
       >
-        {movies.map((movieCard) => (
+        {selectedMovies.map((movieCard) => (
           <MovieCard
             key={movieCard.id}
             cardPath={movieCard.image.url}
@@ -25,11 +26,11 @@ function MovieCardList({ movies }) {
           />
         ))}
       </ul>
-      {currentPath === '/movies' && (
+      {actualPath === '/movies' && (
         <button
           type="button"
           aria-label="Кнопка ещё"
-          onClick={handleMovie}
+          onClick={handleMoreMovies}
           className="more-button"
         >
           Ещё

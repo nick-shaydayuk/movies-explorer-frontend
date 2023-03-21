@@ -6,11 +6,9 @@ import { URL_MOVIES } from '../../utils/consts';
 function MovieCard({ cardPath, duracion, movieCard }) {
   const actualPath = useLocation().pathname;
 
-  console.log(movieCard);
-
   function getImageUrl() {
     if (movieCard.id) {
-      return `${URL_MOVIES}/${cardPath}`;
+      return `${URL_MOVIES}${cardPath}`;
     }
     return movieCard.image;
   }
@@ -24,7 +22,7 @@ function MovieCard({ cardPath, duracion, movieCard }) {
         <figure className="movie-card__card">
           <img
             className="movie-card__image"
-            src={actualPath === '/movies' ? `${URL_MOVIES}/${movieCard.image.url}` : getImageUrl()}
+            src={actualPath === '/movies' ? `${URL_MOVIES}${movieCard.image.url}` : getImageUrl()}
             alt={movieCard.nameRU}
           />
           <figcaption className="movie-card__info">
@@ -42,7 +40,7 @@ function MovieCard({ cardPath, duracion, movieCard }) {
                   aria-label="Удалить из сохранённых"
                 />
               )
-              : <MovieCardButton />}
+              : <MovieCardButton movie={movieCard} />}
           </figcaption>
         </figure>
       </article>

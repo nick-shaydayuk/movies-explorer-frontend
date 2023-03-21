@@ -1,11 +1,21 @@
 import { useState } from 'react';
+import { addMovie, removeMovie } from '../../utils/authApi';
 import './MovieCardButton.scss';
 
-function MovieCardButton() {
+function MovieCardButton({ movie }) {
   const [isLike, setIsLike] = useState(false);
 
   function handleClick() {
-    setIsLike(!isLike);
+    if (!isLike) {
+      addMovie(movie).then(() => {
+        setIsLike(!isLike);
+      })
+    } else {
+      removeMovie(movie).then(() => {
+        setIsLike(!isLike);
+      })
+    }
+
   }
   return (
     <button

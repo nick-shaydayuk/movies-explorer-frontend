@@ -26,6 +26,7 @@
   &__input-container {
     display: flex;
     flex-direction: row;
+    width: 100%;
   }
 
   &__button-container {
@@ -152,6 +153,7 @@
     }
 
     &_not-marked {
+      background: #fff;
       &::before {
         content: '';
         width: 16px;

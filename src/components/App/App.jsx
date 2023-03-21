@@ -10,7 +10,7 @@ import NotFoundView from '../NotFoundView/NotFoundView';
 import Profile from '../Profile/Profile';
 import MoviesView from '../Movies/MoviesView';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { getMyData, login, signup } from '../../utils/authApi';
+import { getMyData, loadMyMovies, login, signup } from '../../utils/authApi';
 import { loadMovies } from '../../utils/mainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
@@ -21,6 +21,7 @@ function App() {
   const [isLoginValid, setIsLoginValid] = useState(true);
   const [movies, setMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+  const [myMovies, setMyMovies] = useState([])
 
   const handleLogin = (email, password) => {
     login(email, password)
@@ -62,6 +63,9 @@ function App() {
     getMyData().then((res) => {
       setCurrentUser(res.data);
     });
+    loadMyMovies().then((res) => {
+      setMyMovies(res)
+    })
   }, [isLogin]);
 
   useEffect(() => {
@@ -109,7 +113,7 @@ function App() {
           />
           <Route
             path="/saved-movies"
-            element={<SavedMovies isLogin={isLogin} />}
+            element={<SavedMovies isLogin={isLogin} movies={myMovies} />}
           />
           <Route path="*" element={<NotFoundView />} />
         </Routes>

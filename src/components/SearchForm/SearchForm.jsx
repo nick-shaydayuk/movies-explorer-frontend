@@ -1,10 +1,12 @@
 import './SearchForm.scss';
 import { useState } from 'react';
-import search from '../../images/search.svg';
 import searchSubmit from '../../images/search-submit.svg';
 
-function SearchForm() {
+function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   const [isChecked, setIsChecked] = useState(true);
+
+
+
   function handleSubmit(evt) {
     evt.preventDefault();
   }
@@ -18,11 +20,12 @@ function SearchForm() {
       <form className="search-form__form" onSubmit={handleSubmit}>
         <div className="search-form__search-container">
           <div className="search-form__input-container">
-            <img src={search} />
             <input
               type="text"
               className="search-form__input"
               placeholder="Фильм"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
               required
             />
           </div>
@@ -38,10 +41,10 @@ function SearchForm() {
               <button
                 type="button"
                 aria-label={
-                  isChecked ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'
+                  lookShort ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'
                 }
                 className={`search-form__radio ${
-                  isChecked
+                  lookShort
                     ? 'search-form__radio_marked'
                     : 'search-form__radio_not-marked'
                 }`}
@@ -63,10 +66,10 @@ function SearchForm() {
             <button
               type="button"
               aria-label={
-                isChecked ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'
+                lookShort ? 'Выбрать короткометражки' : 'Выбрать любые фильмы'
               }
               className={`search-form__radio ${
-                isChecked
+                lookShort
                   ? 'search-form__radio_marked'
                   : 'search-form__radio_not-marked'
               }`}
