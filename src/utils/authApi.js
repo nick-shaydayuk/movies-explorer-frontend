@@ -78,19 +78,22 @@ export const loadMyMovies = async () => {
   return checkResponse(res);
 };
 
-export const addMovie = async ({
-  country,
-  director,
-  duration,
-  year,
-  description,
-  image,
-  trailerLink,
-  owner,
-  movieId,
-  nameRU,
-  nameEN,
-}) => {
+export const addMovie = async (
+  {
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    owner,
+    id,
+    nameRU,
+    nameEN,
+  },
+  { name, email }
+) => {
   const res = await fetch(`${URL_AUTH}/movies`, {
     method: 'POST',
     headers: {
@@ -104,11 +107,14 @@ export const addMovie = async ({
       duration,
       year,
       description,
-      image: `${URL_MOVIES}/${image.url}`,
+      image: `${URL_MOVIES}${image.url}`,
       trailerLink,
-      thumbnail: `${URL_MOVIES}/${image.formats.thumbnail.url}`,
-      owner,
-      movieId,
+      thumbnail: `${URL_MOVIES}${image.formats.thumbnail.url}`,
+      owner: {
+        name: name,
+        email: email,
+      },
+      movieId: id,
       nameRU,
       nameEN,
     }),
@@ -118,7 +124,7 @@ export const addMovie = async ({
 
 export const removeMovie = async (_id) => {
   const res = await fetch(`${URL_AUTH}/movies/${_id}`, {
-    method: 'POST',
+    method: 'DELETE',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',

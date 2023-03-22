@@ -2,7 +2,7 @@ import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
 
-function MovieCardList({ movies, selectedMovies }) {
+function MovieCardList({ selectedMovies, deleteMovie, likeMovie }) {
   const actualPath = useLocation().pathname;
 
   function handleMoreMovies(evt) {
@@ -18,11 +18,13 @@ function MovieCardList({ movies, selectedMovies }) {
       >
         {selectedMovies.map((movieCard) => (
           <MovieCard
-            key={movieCard.id}
+            key={actualPath === '/saved-movies' ? movieCard._id : movieCard.id}
             cardPath={movieCard.image.url}
             title={movieCard.title}
             duracion={movieCard.duration}
             movieCard={movieCard}
+            deleteMovie={deleteMovie}
+            likeMovie={likeMovie}
           />
         ))}
       </ul>

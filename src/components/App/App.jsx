@@ -10,18 +10,26 @@ import NotFoundView from '../NotFoundView/NotFoundView';
 import Profile from '../Profile/Profile';
 import MoviesView from '../Movies/MoviesView';
 import SavedMovies from '../SavedMovies/SavedMovies';
-import { getMyData, loadMyMovies, login, signup } from '../../utils/authApi';
+import {
+  getMyData,
+  loadMyMovies,
+  login,
+  signup,
+  removeMovie,
+  addMovie,
+} from '../../utils/authApi';
 import { loadMovies } from '../../utils/mainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 function App() {
   const navigate = useNavigate();
+
   const [isLogin, setIsLogin] = useState(false);
   const [isRegisterValid, setIsRegisterValid] = useState(true);
   const [isLoginValid, setIsLoginValid] = useState(true);
   const [movies, setMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
-  const [myMovies, setMyMovies] = useState([])
+  const [myMovies, setMyMovies] = useState([]);
 
   const handleLogin = (email, password) => {
     login(email, password)
@@ -50,6 +58,22 @@ function App() {
       });
   };
 
+  const deleteMovie = (movieId) => {
+    removeMovie(movieId).then(() => {
+      loadMyMovies().then((res) => {
+        setMyMovies(res);
+      });
+    });
+  };
+
+  const likeMovie = (movie, user) => {
+    addMovie(movie, user).then(() => {
+      loadMyMovies().then((res) => {
+        setMyMovies(res);
+      });
+    })
+  }
+
   const signOut = () => {
     setIsLogin(false);
     navigate('/');
@@ -64,8 +88,8 @@ function App() {
       setCurrentUser(res.data);
     });
     loadMyMovies().then((res) => {
-      setMyMovies(res)
-    })
+      setMyMovies(res);
+    });
   }, [isLogin]);
 
   useEffect(() => {
@@ -73,6 +97,9 @@ function App() {
     setIsLogin(true);
     loadMovies().then((res) => {
       setMovies(res);
+    });
+    loadMyMovies().then((res) => {
+      setMyMovies(res);
     });
   }, []);
 
@@ -109,11 +136,17 @@ function App() {
           />
           <Route
             path="/movies"
-            element={<MoviesView isLogin={isLogin} movies={movies} />}
+            element={<MoviesView isLogin={isLogin} movies={movies} likeMovie={likeMovie} />}
           />
           <Route
             path="/saved-movies"
-            element={<SavedMovies isLogin={isLogin} movies={myMovies} />}
+            element={
+              <SavedMovies
+                isLogin={isLogin}
+                movies={myMovies}
+                deleteMovie={deleteMovie}
+              />
+            }
           />
           <Route path="*" element={<NotFoundView />} />
         </Routes>

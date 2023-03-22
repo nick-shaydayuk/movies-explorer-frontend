@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import MovieCardButton from '../MovieCardButton/MovieCardButton';
 import { URL_MOVIES } from '../../utils/consts';
 
-function MovieCard({ cardPath, duracion, movieCard }) {
+function MovieCard({ cardPath, duracion, movieCard, deleteMovie, likeMovie }) {
   const actualPath = useLocation().pathname;
 
   function getImageUrl() {
@@ -12,17 +12,17 @@ function MovieCard({ cardPath, duracion, movieCard }) {
     }
     return movieCard.image;
   }
-
-  function handleClick(evt) {
-    console.log(evt);
-  }
   return (
     <li className="movie-item">
       <article className="movie-card">
         <figure className="movie-card__card">
           <img
             className="movie-card__image"
-            src={actualPath === '/movies' ? `${URL_MOVIES}${movieCard.image.url}` : getImageUrl()}
+            src={
+              actualPath === '/movies'
+                ? `${URL_MOVIES}${movieCard.image.url}`
+                : getImageUrl()
+            }
             alt={movieCard.nameRU}
           />
           <figcaption className="movie-card__info">
@@ -31,16 +31,7 @@ function MovieCard({ cardPath, duracion, movieCard }) {
               <p className="movie-card__duration">{duracion}</p>
             </div>
 
-            {actualPath === '/saved-movies'
-              ? (
-                <button
-                  type="button"
-                  onClick={handleClick}
-                  className="movie-card__remove"
-                  aria-label="Удалить из сохранённых"
-                />
-              )
-              : <MovieCardButton movie={movieCard} />}
+            <MovieCardButton movie={movieCard} deleteMovie={deleteMovie} likeMovie={likeMovie} />
           </figcaption>
         </figure>
       </article>
