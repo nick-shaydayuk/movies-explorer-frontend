@@ -117,10 +117,8 @@ function App() {
             element={
               <>
                 <Header isLogin={isLogin} />
-                <ProtectedRoute user={currentUser}>
-                  <Main />
-                  <Footer />
-                </ProtectedRoute>
+                <Main />
+                <Footer />
               </>
             }
           />
