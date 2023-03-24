@@ -17,9 +17,11 @@ import {
   signup,
   removeMovie,
   addMovie,
+  logout,
 } from '../../utils/authApi';
 import { loadMovies } from '../../utils/mainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const navigate = useNavigate();
@@ -71,12 +73,15 @@ function App() {
       loadMyMovies().then((res) => {
         setMyMovies(res);
       });
-    })
-  }
+    });
+  };
 
   const signOut = () => {
-    setIsLogin(false);
-    navigate('/');
+    logout().then(() => {
+      setIsLogin(false);
+      localStorage.removeItem('isLogin');
+      navigate('/');
+    });
   };
 
   useEffect(() => {
@@ -112,8 +117,10 @@ function App() {
             element={
               <>
                 <Header isLogin={isLogin} />
-                <Main />
-                <Footer />
+                <ProtectedRoute user={currentUser}>
+                  <Main />
+                  <Footer />
+                </ProtectedRoute>
               </>
             }
           />
@@ -132,20 +139,34 @@ function App() {
           />
           <Route
             path="/profile"
-            element={<Profile isLogin={isLogin} signOut={signOut} />}
+            element={
+              <ProtectedRoute user={currentUser}>
+                <Profile isLogin={isLogin} signOut={signOut} />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/movies"
-            element={<MoviesView isLogin={isLogin} movies={movies} likeMovie={likeMovie} />}
+            element={
+              <ProtectedRoute user={currentUser}>
+                <MoviesView
+                  isLogin={isLogin}
+                  movies={movies}
+                  likeMovie={likeMovie}
+                />
+              </ProtectedRoute>
+            }
           />
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies
-                isLogin={isLogin}
-                movies={myMovies}
-                deleteMovie={deleteMovie}
-              />
+              <ProtectedRoute user={currentUser}>
+                <SavedMovies
+                  isLogin={isLogin}
+                  movies={myMovies}
+                  deleteMovie={deleteMovie}
+                />
+              </ProtectedRoute>
             }
           />
           <Route path="*" element={<NotFoundView />} />

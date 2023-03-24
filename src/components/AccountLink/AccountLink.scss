@@ -1,4 +1,6 @@
 .account-link {
+  display: flex;
+  justify-content: center;
   &__text {
     display: inline;
     text-decoration: none;

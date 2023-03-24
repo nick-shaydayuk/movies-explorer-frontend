@@ -1,9 +1,7 @@
 import './SearchForm.scss';
-import { useState } from 'react';
 import searchSubmit from '../../images/search-submit.svg';
 
 function SearchForm({ search, setSearch, lookShort, setLookShort }) {
-  const [isChecked, setIsChecked] = useState(true);
 
 
 
@@ -12,13 +10,13 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   }
 
   function handleClick() {
-    setIsChecked(!isChecked);
+    setLookShort(!lookShort);
     console.log('cheked');
   }
   return (
     <div className="search-form">
       <form className="search-form__form" onSubmit={handleSubmit}>
-        <div className="search-form__search-container">
+        <div className="search-form__container">
           <div className="search-form__input-container">
             <input
               type="text"
