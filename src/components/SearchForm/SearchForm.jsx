@@ -1,9 +1,13 @@
 import './SearchForm.scss';
 import searchSubmit from '../../images/search-submit.svg';
+import { useEffect } from 'react';
 
 function SearchForm({ search, setSearch, lookShort, setLookShort }) {
 
-
+  function handleChange(e) {
+    setSearch(e.target.value)
+    localStorage.setItem('search', e.target.value)
+  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -11,8 +15,14 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
 
   function handleClick() {
     setLookShort(!lookShort);
+    localStorage.setItem('lookShort', !lookShort)
     console.log('cheked');
   }
+
+  useEffect(() => {
+    setSearch(localStorage.getItem('search'))
+  }, [])
+
   return (
     <div className="search-form">
       <form className="search-form__form" onSubmit={handleSubmit}>
@@ -23,7 +33,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
               className="search-form__input"
               placeholder="Фильм"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={e => handleChange(e)}
               required
             />
           </div>

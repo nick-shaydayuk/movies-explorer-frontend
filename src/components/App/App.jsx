@@ -64,6 +64,7 @@ function App() {
     removeMovie(movieId).then(() => {
       loadMyMovies().then((res) => {
         setMyMovies(res);
+        localStorage.setItem('myMovies', JSON.stringify(res));
       });
     });
   };
@@ -72,6 +73,7 @@ function App() {
     addMovie(movie, user).then(() => {
       loadMyMovies().then((res) => {
         setMyMovies(res);
+        localStorage.setItem('myMovies', JSON.stringify(res));
       });
     });
   };
@@ -88,12 +90,14 @@ function App() {
     if (!isLogin) return;
     loadMovies().then((res) => {
       setMovies(res);
+      localStorage.setItem('movies', JSON.stringify(res))
     });
     getMyData().then((res) => {
       setCurrentUser(res.data);
     });
     loadMyMovies().then((res) => {
       setMyMovies(res);
+      localStorage.setItem('myMovies', JSON.stringify(res));
     });
   }, [isLogin]);
 
@@ -102,9 +106,11 @@ function App() {
     setIsLogin(true);
     loadMovies().then((res) => {
       setMovies(res);
+      localStorage.setItem('movies', JSON.stringify(res))
     });
     loadMyMovies().then((res) => {
       setMyMovies(res);
+      localStorage.setItem('myMovies', JSON.stringify(res));
     });
   }, []);
 
@@ -149,7 +155,7 @@ function App() {
               <ProtectedRoute user={currentUser}>
                 <MoviesView
                   isLogin={isLogin}
-                  movies={movies}
+                  movies={JSON.parse(localStorage.getItem('movies'))}
                   likeMovie={likeMovie}
                 />
               </ProtectedRoute>

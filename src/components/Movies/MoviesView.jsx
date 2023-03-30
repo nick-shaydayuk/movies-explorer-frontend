@@ -21,7 +21,25 @@ function MoviesView({ isLogin, movies, likeMovie }) {
         );
       })
     );
+    /* if (localStorage.getItem('searchedMovies') === []) return */
+    localStorage.setItem(
+      'searchedMovies',
+      JSON.stringify(movies.filter((v) => {
+        const mNameRU = v.nameRU.toLowerCase();
+        const mNameEN = v.nameEN.toLowerCase();
+        return (
+          mNameRU.includes(search.toLowerCase()) ||
+          mNameEN.includes(search.toLowerCase())
+        );
+      }))
+    );
+    JSON.parse(localStorage.getItem('searchedMovies'))
   }, [search]);
+
+  useEffect(() => {
+    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+    console.log(localStorage.getItem('searchedMovies'));
+  }, [])
 
   return (
     <>

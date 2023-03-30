@@ -21,7 +21,22 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
         );
       })
     );
+    localStorage.setItem(
+      'searchedMyMovies',
+      JSON.stringify(movies.filter((v) => {
+        const mNameRU = v.nameRU.toLowerCase();
+        const mNameEN = v.nameEN.toLowerCase();
+        return (
+          mNameRU.includes(search.toLowerCase()) ||
+          mNameEN.includes(search.toLowerCase())
+        );
+      }))
+    );
   }, [search, movies]);
+
+  useEffect(() => {
+    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMyMovies')));
+  }, [])
 
   return (
     <section className="saved-movies">
@@ -33,7 +48,10 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
           lookShort={lookShort}
           setLookShort={setLookShort}
         />
-        <MoviesCardList selectedMovies={selectedMovies} deleteMovie={deleteMovie} />
+        <MoviesCardList
+          selectedMovies={selectedMovies}
+          deleteMovie={deleteMovie}
+        />
       </main>
       <Footer />
     </section>
