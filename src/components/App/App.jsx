@@ -167,7 +167,7 @@ function App() {
               <ProtectedRoute user={currentUser}>
                 <SavedMovies
                   isLogin={isLogin}
-                  movies={myMovies}
+                  movies={JSON.parse(localStorage.getItem('myMovies'))}
                   deleteMovie={deleteMovie}
                 />
               </ProtectedRoute>
