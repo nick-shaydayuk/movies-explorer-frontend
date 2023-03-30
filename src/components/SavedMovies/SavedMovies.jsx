@@ -10,29 +10,36 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState([]);
 
-  useEffect(() => {
-    setSelectedMovies(
-      movies.filter((v) => {
-        const mNameRU = v.nameRU.toLowerCase();
-        const mNameEN = v.nameEN.toLowerCase();
+  function checkSearch() {
+    if (lookShort) {
+      const result = movies.filter((m) => {
+        const mNameRU = m.nameRU.toLowerCase();
+        const mNameEN = m.nameEN.toLowerCase();
         return (
-          mNameRU.includes(search.toLowerCase()) ||
-          mNameEN.includes(search.toLowerCase())
+          (mNameRU.includes(search.toLowerCase()) && m.duration <= 40) ||
+          (mNameEN.includes(search.toLowerCase()) && m.duration <= 40)
         );
-      })
-    );
+      });
+      return result;
+    }
+    const result = movies.filter((v) => {
+      const mNameRU = v.nameRU.toLowerCase();
+      const mNameEN = v.nameEN.toLowerCase();
+      return (
+        mNameRU.includes(search.toLowerCase()) ||
+        mNameEN.includes(search.toLowerCase())
+      );
+    });
+    return result;
+  }
+
+  useEffect(() => {
+    setSelectedMovies(checkSearch());
     localStorage.setItem(
       'searchedMyMovies',
-      JSON.stringify(movies.filter((v) => {
-        const mNameRU = v.nameRU.toLowerCase();
-        const mNameEN = v.nameEN.toLowerCase();
-        return (
-          mNameRU.includes(search.toLowerCase()) ||
-          mNameEN.includes(search.toLowerCase())
-        );
-      }))
+      JSON.stringify(selectedMovies)
     );
-  }, [search, movies]);
+  }, [search, movies, lookShort]);
 
   useEffect(() => {
     setSelectedMovies(JSON.parse(localStorage.getItem('searchedMyMovies')));

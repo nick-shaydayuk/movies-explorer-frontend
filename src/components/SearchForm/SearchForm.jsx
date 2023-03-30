@@ -16,11 +16,11 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   function handleClick() {
     setLookShort(!lookShort);
     localStorage.setItem('lookShort', !lookShort)
-    console.log('cheked');
   }
 
   useEffect(() => {
     setSearch(localStorage.getItem('search'))
+    setLookShort(localStorage.getItem('lookShort'))
   }, [])
 
   return (

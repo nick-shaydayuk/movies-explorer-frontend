@@ -10,36 +10,38 @@ function MoviesView({ isLogin, movies, likeMovie }) {
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState([]);
 
+  function checkSearch() {
+    if (lookShort) {
+      const result = movies.filter((m) => {
+        const mNameRU = m.nameRU.toLowerCase();
+        const mNameEN = m.nameEN.toLowerCase();
+        return (
+          (mNameRU.includes(search.toLowerCase()) && m.duration <= 40) ||
+          (mNameEN.includes(search.toLowerCase()) && m.duration <= 40)
+        );
+      });
+      return result;
+    }
+    const result = movies.filter((v) => {
+      const mNameRU = v.nameRU.toLowerCase();
+      const mNameEN = v.nameEN.toLowerCase();
+      return (
+        mNameRU.includes(search.toLowerCase()) ||
+        mNameEN.includes(search.toLowerCase())
+      );
+    });
+    return result;
+  }
+
   useEffect(() => {
-    setSelectedMovies(
-      movies.filter((v) => {
-        const mNameRU = v.nameRU.toLowerCase();
-        const mNameEN = v.nameEN.toLowerCase();
-        return (
-          mNameRU.includes(search.toLowerCase()) ||
-          mNameEN.includes(search.toLowerCase())
-        );
-      })
-    );
-    /* if (localStorage.getItem('searchedMovies') === []) return */
-    localStorage.setItem(
-      'searchedMovies',
-      JSON.stringify(movies.filter((v) => {
-        const mNameRU = v.nameRU.toLowerCase();
-        const mNameEN = v.nameEN.toLowerCase();
-        return (
-          mNameRU.includes(search.toLowerCase()) ||
-          mNameEN.includes(search.toLowerCase())
-        );
-      }))
-    );
-    JSON.parse(localStorage.getItem('searchedMovies'))
-  }, [search]);
+    setSelectedMovies(checkSearch());
+    localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
+    JSON.parse(localStorage.getItem('searchedMovies'));
+  }, [search, lookShort]);
 
   useEffect(() => {
     setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
-    console.log(localStorage.getItem('searchedMovies'));
-  }, [])
+  }, []);
 
   return (
     <>
