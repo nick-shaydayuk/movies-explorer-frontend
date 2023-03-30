@@ -81,7 +81,7 @@ function App() {
   const signOut = () => {
     logout().then(() => {
       setIsLogin(false);
-      localStorage.removeItem('isLogin');
+      localStorage.clear();
       navigate('/');
     });
   };
