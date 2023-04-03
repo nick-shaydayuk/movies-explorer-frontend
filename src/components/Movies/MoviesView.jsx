@@ -34,14 +34,17 @@ function MoviesView({ isLogin, movies, likeMovie }) {
   }
 
   useEffect(() => {
+    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+  }, []);
+
+  useEffect(() => {
     setSelectedMovies(checkSearch());
     localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
     JSON.parse(localStorage.getItem('searchedMovies'));
+    if (search === '' && !localStorage.getItem('lookShort')) {
+      setSelectedMovies(JSON.parse(localStorage.getItem('movies')));
+    }
   }, [search, lookShort]);
-
-  useEffect(() => {
-    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
-  }, []);
 
   return (
     <>

@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 function SearchForm({ search, setSearch, lookShort, setLookShort }) {
 
   function handleChange(e) {
-    setSearch(e.target.value)
-    localStorage.setItem('search', e.target.value)
+    setSearch(e.target.value);
+    localStorage.setItem('search', e.target.value);
   }
 
   function handleSubmit(evt) {
@@ -14,14 +14,21 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   }
 
   function handleClick() {
+    localStorage.setItem('lookShort', !lookShort);
     setLookShort(!lookShort);
-    localStorage.setItem('lookShort', !lookShort)
   }
 
   useEffect(() => {
-    setSearch(localStorage.getItem('search'))
-    setLookShort(localStorage.getItem('lookShort'))
-  }, [])
+    if (localStorage.getItem('search')) {
+      setSearch(localStorage.getItem('search'));
+    }
+    if (localStorage.getItem('lookShort') === 'true') {
+      setLookShort(true);
+    }
+    if (localStorage.getItem('lookShort') === 'false') {
+      setLookShort(false);
+    }
+  }, []);
 
   return (
     <div className="search-form">
@@ -33,7 +40,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
               className="search-form__input"
               placeholder="Фильм"
               value={search}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
               required
             />
           </div>
@@ -58,7 +65,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
                 }`}
                 onClick={handleClick}
               />
-              <p className="search-form__button-subtitle">Короткометражки</p>
+              <p className="search-form__button-subtitle">Короткометражки{lookShort}</p>
             </div>
           </div>
         </div>
