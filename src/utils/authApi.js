@@ -19,11 +19,11 @@ export const signup = async (name, email, password) => {
 export const login = async (email, password) => {
   const res = await fetch(`${URL_AUTH}/signin`, {
     method: 'POST',
-    credentials: 'include',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({ email, password }),
   });
   return checkResponse(res);
