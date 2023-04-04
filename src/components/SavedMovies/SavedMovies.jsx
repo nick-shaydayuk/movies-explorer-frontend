@@ -42,7 +42,7 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
   }, [search, movies, lookShort]);
 
   useEffect(() => {
-    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMyMovies')));
+    setSelectedMovies(JSON.parse(localStorage.getItem('myMovies')));
   }, [])
 
   return (
