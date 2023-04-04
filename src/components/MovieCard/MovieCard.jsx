@@ -1,14 +1,14 @@
 import './MovieCard.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCardButton from '../MovieCardButton/MovieCardButton';
-import { URL_MOVIES } from '../../utils/consts';
+import { URL_MOVIES_IMG } from '../../utils/consts';
 
 function MovieCard({ cardPath, duracion, movieCard, deleteMovie, likeMovie }) {
   const actualPath = useLocation().pathname;
 
   function getImageUrl() {
     if (movieCard.id) {
-      return `${URL_MOVIES}${cardPath}`;
+      return `${URL_MOVIES_IMG}${cardPath}`;
     }
     return movieCard.image;
   }
@@ -20,7 +20,7 @@ function MovieCard({ cardPath, duracion, movieCard, deleteMovie, likeMovie }) {
             className="movie-card__image"
             src={
               actualPath === '/movies'
-                ? `${URL_MOVIES}${movieCard.image.url}`
+                ? `${URL_MOVIES_IMG}${movieCard.image.url}`
                 : getImageUrl()
             }
             alt={movieCard.nameRU}
