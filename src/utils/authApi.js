@@ -1,4 +1,4 @@
-import { URL_AUTH, URL_MOVIES } from './consts';
+import { URL_AUTH, URL_MOVIES_IMG } from './consts';
 
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Ошибка ${res.status}`);
@@ -87,7 +87,6 @@ export const addMovie = async (
     description,
     image,
     trailerLink,
-    owner,
     id,
     nameRU,
     nameEN,
@@ -107,9 +106,9 @@ export const addMovie = async (
       duration,
       year,
       description,
-      image: `${URL_MOVIES}${image.url}`,
+      image: `${URL_MOVIES_IMG}${image.url}`,
       trailerLink,
-      thumbnail: `${URL_MOVIES}${image.formats.thumbnail.url}`,
+      thumbnail: `${URL_MOVIES_IMG}${image.formats.thumbnail.url}`,
       owner: {
         name: name,
         email: email,
