@@ -151,7 +151,7 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute user={currentUser}>
-                <Profile isLogin={isLogin} signOut={signOut} />
+                <Profile isLogin={isLogin} signOut={signOut} setCurrentUser={setCurrentUser} />
               </ProtectedRoute>
             }
           />

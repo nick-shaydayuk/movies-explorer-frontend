@@ -4,11 +4,13 @@ import Header from '../Header/Header';
 import CurrentuserContext from '../../contexts/CurrentUserContext';
 import { changeMyData } from '../../utils/authApi';
 
-function Profile({ signOut, isLogin }) {
+function Profile({ signOut, isLogin, setCurrentUser }) {
   const [isOnEdit, setIsOnEdit] = useState(false);
   const [title, setTitle] = useState('');
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const user = useContext(CurrentuserContext);
+  console.log(user);
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -21,11 +23,17 @@ function Profile({ signOut, isLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (name === user.name && email === user.email) return;
     changeMyData(email, name).then((res) => {
       setName(res.data.name);
       setEmail(res.data.email);
       setTitle(res.data.name);
       setIsOnEdit(!isOnEdit);
+      setIsPopupOpen(true)
+      setCurrentUser(res.data)
+      setTimeout(() => {
+        setIsPopupOpen(false)
+      }, 1000)
     });
   }
 
@@ -79,6 +87,7 @@ function Profile({ signOut, isLogin }) {
                 type="button"
                 onClick={handleSubmit}
                 className="profile__edit"
+                disabled={name === user.name && email === user.email}
               >
                 Сохранить
               </button>
@@ -110,6 +119,11 @@ function Profile({ signOut, isLogin }) {
           )}
         </section>
       </main>
+      {isPopupOpen ? (<div className="popup">
+        <div className="popup__container">
+          <h3>Данные обновлены</h3>
+        </div>
+      </div>) : <></>}
     </>
   );
 }
