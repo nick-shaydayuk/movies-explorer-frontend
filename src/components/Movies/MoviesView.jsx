@@ -34,6 +34,12 @@ function MoviesView({ isLogin, movies, likeMovie }) {
   }
 
   useEffect(() => {
+    setSelectedMovies([])
+    if (
+      localStorage.getItem('searchedMovies') === '[]' ||
+      !localStorage.getItem('searchedMovies')
+    )
+      return;
     setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
   }, []);
 
@@ -42,7 +48,7 @@ function MoviesView({ isLogin, movies, likeMovie }) {
     localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
     JSON.parse(localStorage.getItem('searchedMovies'));
     if (search === '' && !localStorage.getItem('lookShort')) {
-      setSelectedMovies(JSON.parse(localStorage.getItem('movies')));
+      setSelectedMovies(movies);
     }
   }, [search, lookShort]);
 
@@ -63,7 +69,6 @@ function MoviesView({ isLogin, movies, likeMovie }) {
           />
         </section>
       </main>
-
       <Footer />
     </>
   );

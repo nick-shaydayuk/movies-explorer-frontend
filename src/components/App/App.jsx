@@ -39,6 +39,12 @@ function App() {
         setIsLogin(true);
         localStorage.setItem('isLogin', true);
         setIsLoginValid(true);
+        loadMovies().then((res) => {
+          setMovies(res);
+          localStorage.setItem('movies', JSON.stringify(res));
+        });
+      })
+      .then(() => {
         navigate('/movies');
       })
       .catch((err) => {
@@ -50,7 +56,7 @@ function App() {
   const handleRegister = (name, email, password) => {
     signup(name, email, password)
       .then((res) => {
-        if (!res.ok) return;
+        console.log(res, res.ok);
         handleLogin(res.email, password);
         setIsRegisterValid(true);
       })
@@ -90,7 +96,7 @@ function App() {
     if (!isLogin) return;
     loadMovies().then((res) => {
       setMovies(res);
-      localStorage.setItem('movies', JSON.stringify(res))
+      localStorage.setItem('movies', JSON.stringify(res));
     });
     getMyData().then((res) => {
       setCurrentUser(res.data);
@@ -106,7 +112,7 @@ function App() {
     setIsLogin(true);
     loadMovies().then((res) => {
       setMovies(res);
-      localStorage.setItem('movies', JSON.stringify(res))
+      localStorage.setItem('movies', JSON.stringify(res));
     });
     loadMyMovies().then((res) => {
       setMyMovies(res);
@@ -155,7 +161,7 @@ function App() {
               <ProtectedRoute user={currentUser}>
                 <MoviesView
                   isLogin={isLogin}
-                  movies={JSON.parse(localStorage.getItem('movies'))}
+                  movies={movies}
                   likeMovie={likeMovie}
                 />
               </ProtectedRoute>
@@ -167,7 +173,7 @@ function App() {
               <ProtectedRoute user={currentUser}>
                 <SavedMovies
                   isLogin={isLogin}
-                  movies={JSON.parse(localStorage.getItem('myMovies'))}
+                  movies={myMovies}
                   deleteMovie={deleteMovie}
                 />
               </ProtectedRoute>

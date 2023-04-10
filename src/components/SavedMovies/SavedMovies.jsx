@@ -42,6 +42,7 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
   }, [search, movies, lookShort]);
 
   useEffect(() => {
+    if (localStorage.getItem('myMovies') === []) return;
     setSelectedMovies(JSON.parse(localStorage.getItem('myMovies')));
   }, [])
 

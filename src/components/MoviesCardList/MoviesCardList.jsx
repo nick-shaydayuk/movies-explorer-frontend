@@ -9,7 +9,6 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie }) {
   const actualPath = useLocation().pathname;
   const screenWidth = useGetScreenWidth();
   const initialCards = useInitialCards(screenWidth);
-
   const [initialMovies, setInitialMovies] = useState([]);
   const [counter, setCounter] = useState(0);
 

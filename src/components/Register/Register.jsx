@@ -1,21 +1,33 @@
 import './Register.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 function Register({ handleRegister, isValid }) {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  function isValidEmail(email) {
+    return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]{2,61}(?:[a-zA-Z0-9-.][a-zA-Z0-9]{2,61})*$/.test(
+      email
+    );
+  }
 
   function onSubmit(e) {
     e.preventDefault();
+    if (!isValidEmail(emailRef.current.value)) {
+      setIsEmailValid(false);
+      return;
+    }
     handleRegister(
       nameRef.current.value,
       emailRef.current.value,
       passwordRef.current.value
     );
   }
+
   return (
     <main>
       <section className="register">
@@ -42,7 +54,9 @@ function Register({ handleRegister, isValid }) {
                 id="Email"
                 name="Email"
                 className={`form-register__input ${
-                  isValid ? '' : 'form-register__input_invalid'
+                  !isValid || !isEmailValid
+                    ? 'form-register__input_invalid'
+                    : ''
                 }`}
                 type="Email"
                 ref={emailRef}
@@ -53,6 +67,13 @@ function Register({ handleRegister, isValid }) {
               ) : (
                 <span className="form-register__error">
                   Что-то пошло не так...
+                </span>
+              )}
+              {isEmailValid ? (
+                <></>
+              ) : (
+                <span className="form-register__error">
+                  Введите корретный email
                 </span>
               )}
             </label>
