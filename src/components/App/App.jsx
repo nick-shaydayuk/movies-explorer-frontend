@@ -22,6 +22,7 @@ import {
 import { loadMovies } from '../../utils/mainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedUserRoute from '../ProtectedUserRoute/ProtectedUserRoute';
 
 function App() {
   const navigate = useNavigate();
@@ -68,8 +69,8 @@ function App() {
 
   const deleteMovie = (movieId) => {
     removeMovie(movieId).then(() => {
-      const newMyMovies = myMovies.filter(m => m._id !== movieId)
-      setMyMovies(newMyMovies)
+      const newMyMovies = myMovies.filter((m) => m._id !== movieId);
+      setMyMovies(newMyMovies);
       localStorage.setItem('myMovies', JSON.stringify(myMovies));
     });
   };
@@ -77,7 +78,7 @@ function App() {
   const likeMovie = (movie, user) => {
     addMovie(movie, user).then(() => {
       console.log(movie);
-      setMyMovies([...myMovies, movie])
+      setMyMovies([...myMovies, movie]);
       console.log(myMovies);
       localStorage.setItem('myMovies', JSON.stringify(myMovies));
     });
@@ -135,22 +136,32 @@ function App() {
           />
           <Route
             path="/signin"
-            element={<Login handleLogin={handleLogin} isValid={isLoginValid} />}
+            element={
+              <ProtectedUserRoute user={currentUser}>
+                <Login handleLogin={handleLogin} isValid={isLoginValid} />
+              </ProtectedUserRoute>
+            }
           />
           <Route
             path="/signup"
             element={
-              <Register
-                handleRegister={handleRegister}
-                isValid={isRegisterValid}
-              />
+              <ProtectedUserRoute user={currentUser}>
+                <Register
+                  handleRegister={handleRegister}
+                  isValid={isRegisterValid}
+                />
+              </ProtectedUserRoute>
             }
           />
           <Route
             path="/profile"
             element={
               <ProtectedRoute user={currentUser}>
-                <Profile isLogin={isLogin} signOut={signOut} setCurrentUser={setCurrentUser} />
+                <Profile
+                  isLogin={isLogin}
+                  signOut={signOut}
+                  setCurrentUser={setCurrentUser}
+                />
               </ProtectedRoute>
             }
           />
