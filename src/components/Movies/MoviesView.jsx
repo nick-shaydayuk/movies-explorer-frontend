@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
 
-function MoviesView({ isLogin, movies, likeMovie }) {
+function MoviesView({ isLogin, movies, myMovies, likeMovie }) {
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState([]);
@@ -66,6 +66,7 @@ function MoviesView({ isLogin, movies, likeMovie }) {
           <MoviesCardList
             selectedMovies={selectedMovies}
             likeMovie={likeMovie}
+            myMovies={myMovies}
           />
         </section>
       </main>

@@ -57,7 +57,6 @@ function App() {
   const handleRegister = (name, email, password) => {
     signup(name, email, password)
       .then((res) => {
-        console.log(res, res.ok);
         handleLogin(res.email, password);
         setIsRegisterValid(true);
       })
@@ -77,9 +76,7 @@ function App() {
 
   const likeMovie = (movie, user) => {
     addMovie(movie, user).then(() => {
-      console.log(movie);
       setMyMovies([...myMovies, movie]);
-      console.log(myMovies);
       localStorage.setItem('myMovies', JSON.stringify(myMovies));
     });
   };
@@ -90,6 +87,7 @@ function App() {
       localStorage.clear();
       navigate('/');
     });
+    setCurrentUser(null);
   };
 
   useEffect(() => {
@@ -172,6 +170,7 @@ function App() {
                 <MoviesView
                   isLogin={isLogin}
                   movies={movies}
+                  myMovies={myMovies}
                   likeMovie={likeMovie}
                 />
               </ProtectedRoute>

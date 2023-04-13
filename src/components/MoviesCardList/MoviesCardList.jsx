@@ -5,7 +5,7 @@ import useInitialCards from '../../utils/useInitialCards';
 import useGetScreenWidth from '../../utils/useGetScreenWidth';
 import { useEffect, useState } from 'react';
 
-function MovieCardList({ selectedMovies, deleteMovie, likeMovie }) {
+function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies }) {
   const actualPath = useLocation().pathname;
   const screenWidth = useGetScreenWidth();
   const initialCards = useInitialCards(screenWidth);
@@ -38,10 +38,11 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie }) {
             key={actualPath === '/saved-movies' ? movieCard._id : movieCard.id}
             cardPath={movieCard.image.url}
             title={movieCard.title}
-            duracion={movieCard.duration}
+            duration={movieCard.duration}
             movieCard={movieCard}
             deleteMovie={deleteMovie}
             likeMovie={likeMovie}
+            myMovies={myMovies}
           />
         ))}
       </ul>

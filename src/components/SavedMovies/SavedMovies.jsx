@@ -11,7 +11,6 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
   const [selectedMovies, setSelectedMovies] = useState([]);
 
   function checkSearch() {
-    console.log(movies);
     if (lookShort) {
       const result = movies.filter((m) => {
         const mNameRU = m.nameRU.toLowerCase();
