@@ -68,19 +68,18 @@ function App() {
 
   const deleteMovie = (movieId) => {
     removeMovie(movieId).then(() => {
-      loadMyMovies().then((res) => {
-        setMyMovies(res);
-        localStorage.setItem('myMovies', JSON.stringify(res));
-      });
+      const newMyMovies = myMovies.filter(m => m._id !== movieId)
+      setMyMovies(newMyMovies)
+      localStorage.setItem('myMovies', JSON.stringify(myMovies));
     });
   };
 
   const likeMovie = (movie, user) => {
     addMovie(movie, user).then(() => {
-      loadMyMovies().then((res) => {
-        setMyMovies(res);
-        localStorage.setItem('myMovies', JSON.stringify(res));
-      });
+      console.log(movie);
+      setMyMovies([...myMovies, movie])
+      console.log(myMovies);
+      localStorage.setItem('myMovies', JSON.stringify(myMovies));
     });
   };
 

@@ -10,7 +10,6 @@ function Profile({ signOut, isLogin, setCurrentUser }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const user = useContext(CurrentuserContext);
-  console.log(user);
 
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
