@@ -135,7 +135,7 @@ function App() {
           <Route
             path="/signin"
             element={
-              <ProtectedUserRoute user={currentUser}>
+              <ProtectedUserRoute user={currentUser} isLogin={isLogin}>
                 <Login handleLogin={handleLogin} isValid={isLoginValid} />
               </ProtectedUserRoute>
             }
@@ -143,7 +143,7 @@ function App() {
           <Route
             path="/signup"
             element={
-              <ProtectedUserRoute user={currentUser}>
+              <ProtectedUserRoute user={currentUser}  isLogin={isLogin}>
                 <Register
                   handleRegister={handleRegister}
                   isValid={isRegisterValid}
