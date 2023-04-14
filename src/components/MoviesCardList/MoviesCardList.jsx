@@ -33,7 +33,7 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies }) {
           actualPath === '/saved-movies' ? 'card-list_saved-movies' : ''
         }`}
       >
-        {selectedMovies.map((movieCard) => (
+        {initialMovies.map((movieCard) => (
           <MovieCard
             key={actualPath === '/saved-movies' ? movieCard._id : movieCard.id}
             cardPath={movieCard.image.url}
