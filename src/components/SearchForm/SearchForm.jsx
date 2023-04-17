@@ -1,11 +1,14 @@
 import './SearchForm.scss';
 import searchSubmit from '../../images/search-submit.svg';
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function SearchForm({ search, setSearch, lookShort, setLookShort }) {
+  const actualPath = useLocation().pathname;
 
   function handleChange(e) {
     setSearch(e.target.value);
+    if (actualPath === '/saved-movies') return
     localStorage.setItem('search', e.target.value);
   }
 
@@ -19,6 +22,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   }
 
   useEffect(() => {
+    if (actualPath === '/saved-movies') return
     if (localStorage.getItem('search')) {
       setSearch(localStorage.getItem('search'));
     }

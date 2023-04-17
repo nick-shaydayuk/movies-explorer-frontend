@@ -35,14 +35,10 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
 
   useEffect(() => {
     setSelectedMovies(checkSearch());
-    localStorage.setItem(
-      'searchedMyMovies',
-      JSON.stringify(selectedMovies)
-    );
   }, [search, movies, lookShort]);
 
   useEffect(() => {
-    if (localStorage.getItem('myMovies') === []) return;
+    if (localStorage.getItem('myMovies').length === 0) return;
     setSelectedMovies(movies);
   }, [])
 
