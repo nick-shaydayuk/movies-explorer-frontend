@@ -47,10 +47,8 @@ function App() {
         loadMovies().then((res) => {
           setMovies(res);
           localStorage.setItem('movies', JSON.stringify(res));
+          navigate('/movies');
         });
-      })
-      .then(() => {
-        navigate('/movies');
       })
       .catch((err) => {
         console.log(err);

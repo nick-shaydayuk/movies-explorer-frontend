@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 function MoviesView({ isLogin, movies, myMovies, likeMovie }) {
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
-  const [selectedMovies, setSelectedMovies] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState(movies);
 
   function checkSearch() {
     if (lookShort) {
@@ -36,24 +36,28 @@ function MoviesView({ isLogin, movies, myMovies, likeMovie }) {
   useEffect(() => {
     if (search === '' && !localStorage.getItem('lookShort')) {
       setSelectedMovies(movies);
-      return
+      return;
     }
     setSelectedMovies(checkSearch());
     localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
   }, [search, lookShort]);
 
   useEffect(() => {
-
     if (localStorage.getItem('search')) {
       setSearch(localStorage.getItem('search'));
     }
-    if (localStorage.getItem('lookShort') === 'true') {
-      setLookShort(true);
+    if (localStorage.getItem('lookShort')) {
+      if (localStorage.getItem('lookShort') === 'true') {
+        setLookShort(true);
+      }
+      if (localStorage.getItem('lookShort') === 'false') {
+        setLookShort(false);
+      }
     }
-    if (localStorage.getItem('lookShort') === 'false') {
-      setLookShort(false);
+
+    if (localStorage.getItem('searchedMovies')) {
+      setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
     }
-    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
   }, []);
 
   return (
