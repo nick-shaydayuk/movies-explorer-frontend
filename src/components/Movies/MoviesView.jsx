@@ -34,23 +34,27 @@ function MoviesView({ isLogin, movies, myMovies, likeMovie }) {
   }
 
   useEffect(() => {
-    setSelectedMovies([])
-    if (
-      localStorage.getItem('searchedMovies') === '[]' ||
-      !localStorage.getItem('searchedMovies')
-    )
-      return;
-    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
-  }, []);
-
-  useEffect(() => {
-    setSelectedMovies(checkSearch());
-    localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
-    JSON.parse(localStorage.getItem('searchedMovies'));
     if (search === '' && !localStorage.getItem('lookShort')) {
       setSelectedMovies(movies);
+      return
     }
+    setSelectedMovies(checkSearch());
+    localStorage.setItem('searchedMovies', JSON.stringify(selectedMovies));
   }, [search, lookShort]);
+
+  useEffect(() => {
+
+    if (localStorage.getItem('search')) {
+      setSearch(localStorage.getItem('search'));
+    }
+    if (localStorage.getItem('lookShort') === 'true') {
+      setLookShort(true);
+    }
+    if (localStorage.getItem('lookShort') === 'false') {
+      setLookShort(false);
+    }
+    setSelectedMovies(JSON.parse(localStorage.getItem('searchedMovies')));
+  }, []);
 
   return (
     <>
