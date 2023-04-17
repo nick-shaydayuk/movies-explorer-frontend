@@ -30,7 +30,11 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [isRegisterValid, setIsRegisterValid] = useState(true);
   const [isLoginValid, setIsLoginValid] = useState(true);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(
+    localStorage.getItem('searchedMovies')
+      ? JSON.parse(localStorage.getItem('searchedMovies'))
+      : []
+  );
   const [currentUser, setCurrentUser] = useState({});
   const [myMovies, setMyMovies] = useState([]);
 
@@ -143,7 +147,7 @@ function App() {
           <Route
             path="/signup"
             element={
-              <ProtectedUserRoute user={currentUser}  isLogin={isLogin}>
+              <ProtectedUserRoute user={currentUser} isLogin={isLogin}>
                 <Register
                   handleRegister={handleRegister}
                   isValid={isRegisterValid}

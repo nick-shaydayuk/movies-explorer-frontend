@@ -5,7 +5,9 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useState, useEffect } from 'react';
 
+
 function SavedMovies({ isLogin, movies, deleteMovie }) {
+
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState([]);
@@ -36,11 +38,6 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
   useEffect(() => {
     setSelectedMovies(checkSearch());
   }, [search, movies, lookShort]);
-
-  useEffect(() => {
-    if (localStorage.getItem('myMovies').length === 0) return;
-    setSelectedMovies(movies);
-  }, [])
 
   return (
     <section className="saved-movies">

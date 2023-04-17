@@ -1,6 +1,5 @@
 import './SearchForm.scss';
 import searchSubmit from '../../images/search-submit.svg';
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function SearchForm({ search, setSearch, lookShort, setLookShort }) {
@@ -21,18 +20,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
     setLookShort(!lookShort);
   }
 
-  useEffect(() => {
-    if (actualPath === '/saved-movies') return
-    if (localStorage.getItem('search')) {
-      setSearch(localStorage.getItem('search'));
-    }
-    if (localStorage.getItem('lookShort') === 'true') {
-      setLookShort(true);
-    }
-    if (localStorage.getItem('lookShort') === 'false') {
-      setLookShort(false);
-    }
-  }, []);
+
 
   return (
     <div className="search-form">
