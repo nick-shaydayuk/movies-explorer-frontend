@@ -8,6 +8,7 @@ function Register({ handleRegister, isValid }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   function isValidEmail(email) {
     return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]{2,61}(?:[a-zA-Z0-9-.][a-zA-Z0-9]{2,61})*$/.test(
@@ -16,6 +17,7 @@ function Register({ handleRegister, isValid }) {
   }
 
   function onSubmit(e) {
+    setIsLoading(true)
     e.preventDefault();
     if (!isValidEmail(emailRef.current.value)) {
       setIsEmailValid(false);
@@ -46,6 +48,7 @@ function Register({ handleRegister, isValid }) {
                 maxLength="30"
                 ref={nameRef}
                 required
+                disabled={isLoading}
               />
             </label>
             <label className="form-register__label" htmlFor="Email">
@@ -61,6 +64,7 @@ function Register({ handleRegister, isValid }) {
                 type="Email"
                 ref={emailRef}
                 required
+                disabled={isLoading}
               />
               {isValid ? (
                 <></>
@@ -90,6 +94,7 @@ function Register({ handleRegister, isValid }) {
                 maxLength="20"
                 ref={passwordRef}
                 required
+                disabled={isLoading}
               />
               {isValid ? (
                 <></>
@@ -101,7 +106,7 @@ function Register({ handleRegister, isValid }) {
             </label>
           </div>
           <div>
-            <button type="submit" className="form-register__submit">
+            <button type="submit" className="form-register__submit" disabled={isLoading}>
               Зарегистрироваться
             </button>
             <div>

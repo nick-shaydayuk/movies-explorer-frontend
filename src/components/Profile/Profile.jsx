@@ -7,7 +7,10 @@ import { changeMyData } from '../../utils/authApi';
 function Profile({ signOut, isLogin, setCurrentUser }) {
   const [isOnEdit, setIsOnEdit] = useState(false);
   const [title, setTitle] = useState('');
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const [isSuccessPopupOpen, setIsSuccessPopupOpen] = useState(false);
+  const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const user = useContext(CurrentuserContext);
 
@@ -22,22 +25,41 @@ function Profile({ signOut, isLogin, setCurrentUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true)
     if (name === user.name && email === user.email) return;
     changeMyData(email, name).then((res) => {
       setName(res.data.name);
       setEmail(res.data.email);
       setTitle(res.data.name);
-      setIsOnEdit(!isOnEdit);
-      setIsPopupOpen(true)
-      setCurrentUser(res.data)
-      setTimeout(() => {
-        setIsPopupOpen(false)
-      }, 1000)
-    });
+      setIsOnEdit(false);
+      setIsSuccessPopupOpen(true);
+      setCurrentUser(res.data);
+    }).catch((err) => {
+      setErrorMessage(err)
+      setIsErrorPopupOpen(true)
+    }).finally(() => {
+      setIsLoading(false)
+    })
   }
 
   function handleEditClick() {
     setIsOnEdit(true);
+  }
+
+  function popup(m) {
+    setTimeout(() => {
+      setIsErrorPopupOpen(false);
+    }, 3000);
+    setTimeout(() => {
+      setIsSuccessPopupOpen(false);
+    }, 1000);
+    return (
+      <div className="popup">
+        <div className="popup__container">
+          <h3>{m}</h3>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -59,7 +81,7 @@ function Profile({ signOut, isLogin, setCurrentUser }) {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                disabled={!isOnEdit}
+                disabled={!isOnEdit || isLoading}
               />
             </div>
 
@@ -73,7 +95,7 @@ function Profile({ signOut, isLogin, setCurrentUser }) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                disabled={!isOnEdit}
+                disabled={!isOnEdit || isLoading}
               />
             </div>
             <span className="form-profile__error form-profile__error_type_email">
@@ -118,11 +140,8 @@ function Profile({ signOut, isLogin, setCurrentUser }) {
           )}
         </section>
       </main>
-      {isPopupOpen ? (<div className="popup">
-        <div className="popup__container">
-          <h3>Данные обновлены</h3>
-        </div>
-      </div>) : <></>}
+      {isSuccessPopupOpen ? popup('Данные обновлены') : <></>}
+      {isErrorPopupOpen ? popup(errorMessage) : <></>}
     </>
   );
 }

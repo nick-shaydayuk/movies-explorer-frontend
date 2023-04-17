@@ -156,7 +156,7 @@ function App() {
           <Route
             path="/profile"
             element={
-              <ProtectedRoute user={currentUser}>
+              <ProtectedRoute user={currentUser} isLogin={isLogin}>
                 <Profile
                   isLogin={isLogin}
                   signOut={signOut}
@@ -168,7 +168,7 @@ function App() {
           <Route
             path="/movies"
             element={
-              <ProtectedRoute user={currentUser}>
+              <ProtectedRoute user={currentUser} isLogin={isLogin}>
                 <MoviesView
                   isLogin={isLogin}
                   movies={movies}
@@ -181,7 +181,7 @@ function App() {
           <Route
             path="/saved-movies"
             element={
-              <ProtectedRoute user={currentUser}>
+              <ProtectedRoute user={currentUser} isLogin={isLogin}>
                 <SavedMovies
                   isLogin={isLogin}
                   movies={myMovies}

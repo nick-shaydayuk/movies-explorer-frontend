@@ -7,6 +7,7 @@ function Login({ handleLogin, isValid }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   function isValidEmail(email) {
     return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]{2,61}(?:[a-zA-Z0-9-.][a-zA-Z0-9]{2,61})*$/.test(
@@ -15,12 +16,13 @@ function Login({ handleLogin, isValid }) {
   }
 
   function onSubmit(e) {
+    setIsLoading(true)
     e.preventDefault();
     if (!isValidEmail(emailRef.current.value)) {
       setIsEmailValid(false);
       return;
     }
-    handleLogin(emailRef.current.value, passwordRef.current.value);
+    handleLogin(emailRef.current.value, passwordRef.current.value)
   }
   return (
     <main>
@@ -40,6 +42,7 @@ function Login({ handleLogin, isValid }) {
                 type="Email"
                 ref={emailRef}
                 required
+                disabled={isLoading}
               />
               {isValid ? (
                 <></>
@@ -69,6 +72,7 @@ function Login({ handleLogin, isValid }) {
                 maxLength="20"
                 ref={passwordRef}
                 required
+                disabled={isLoading}
               />
               {isValid ? (
                 <></>
@@ -80,7 +84,7 @@ function Login({ handleLogin, isValid }) {
             </label>
           </div>
           <div>
-            <button type="submit" className="form-login__submit">
+            <button type="submit" className="form-login__submit" disabled={isLoading}>
               Войти
             </button>
             <div>
