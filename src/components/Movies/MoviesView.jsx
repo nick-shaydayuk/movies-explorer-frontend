@@ -4,8 +4,16 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
+import { SHORT_MOVIE_DURATION } from '../../utils/consts';
 
-function MoviesView({ isLogin, movies, myMovies, likeMovie, deleteMovie, isPreloaderOpen }) {
+function MoviesView({
+  isLogin,
+  movies,
+  myMovies,
+  likeMovie,
+  deleteMovie,
+  isPreloaderOpen,
+}) {
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState(movies);
@@ -16,8 +24,10 @@ function MoviesView({ isLogin, movies, myMovies, likeMovie, deleteMovie, isPrelo
         const mNameRU = m.nameRU.toLowerCase();
         const mNameEN = m.nameEN.toLowerCase();
         return (
-          (mNameRU.includes(search.toLowerCase()) && m.duration <= 40) ||
-          (mNameEN.includes(search.toLowerCase()) && m.duration <= 40)
+          (mNameRU.includes(search.toLowerCase()) &&
+            m.duration <= SHORT_MOVIE_DURATION) ||
+          (mNameEN.includes(search.toLowerCase()) &&
+            m.duration <= SHORT_MOVIE_DURATION)
         );
       });
       return result;

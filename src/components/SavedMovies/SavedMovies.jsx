@@ -4,10 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useState, useEffect } from 'react';
-
+import { SHORT_MOVIE_DURATION } from '../../utils/consts';
 
 function SavedMovies({ isLogin, movies, deleteMovie }) {
-
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState([]);
@@ -18,8 +17,10 @@ function SavedMovies({ isLogin, movies, deleteMovie }) {
         const mNameRU = m.nameRU.toLowerCase();
         const mNameEN = m.nameEN.toLowerCase();
         return (
-          (mNameRU.includes(search.toLowerCase()) && m.duration <= 40) ||
-          (mNameEN.includes(search.toLowerCase()) && m.duration <= 40)
+          (mNameRU.includes(search.toLowerCase()) &&
+            m.duration <= SHORT_MOVIE_DURATION) ||
+          (mNameEN.includes(search.toLowerCase()) &&
+            m.duration <= SHORT_MOVIE_DURATION)
         );
       });
       return result;

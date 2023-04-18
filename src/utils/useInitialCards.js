@@ -1,20 +1,32 @@
+import {
+  MAX_DISPLAY,
+  MID_DISPLAY,
+  MIN_DISPLAY,
+  MAX_DISPLAY_START,
+  MAX_DISPLAY_ADD,
+  MID_DISPLAY_START,
+  MID_DISPLAY_ADD,
+  MIN_DISPLAY_START,
+  MIN_DISPLAY_ADD,
+} from './consts';
+
 function useInitialCards(screenWidth) {
   const initialCards = {};
 
-  if (screenWidth >= 1280) {
-    initialCards.start = 12;
-    initialCards.add = 3;
+  if (screenWidth >= MAX_DISPLAY) {
+    initialCards.start = MAX_DISPLAY_START;
+    initialCards.add = MAX_DISPLAY_ADD;
     return initialCards;
   }
 
-  if (screenWidth <= 928 && screenWidth > 768) {
-    initialCards.start = 8;
-    initialCards.add = 2;
+  if (screenWidth <= MID_DISPLAY && screenWidth > MIN_DISPLAY) {
+    initialCards.start = MID_DISPLAY_START;
+    initialCards.add = MID_DISPLAY_ADD;
     return initialCards;
   }
 
-  initialCards.start = 5;
-  initialCards.add = 5;
+  initialCards.start = MIN_DISPLAY_START;
+  initialCards.add = MIN_DISPLAY_ADD;
 
   return initialCards;
 }
