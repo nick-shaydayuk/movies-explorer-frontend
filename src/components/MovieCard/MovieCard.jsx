@@ -23,15 +23,23 @@ function MovieCard({ cardPath, duration, movieCard, deleteMovie, likeMovie, myMo
     if (!isLike && actualPath !== '/saved-movies') {
       likeMovie(movieCard, user)
       setIsLike(true);
-    } else if (actualPath === '/saved-movies') {
-      deleteMovie(movieCard._id)
+    } else {
+      if (!movieCard._id) {
+        console.log(1);
+        const movie = JSON.parse(localStorage.getItem('myMovies'))
+        .find((item) => item.movieId === movieCard.id || item.id === movieCard.id);
+        deleteMovie(movie)
+        setIsLike(false)
+        return
+      }
+      deleteMovie(movieCard)
       setIsLike(false);
     }
   }
 
   useEffect(() => {
     if (actualPath === '/movies') {
-      const like = JSON.parse(localStorage.myMovies)
+      const like = myMovies
         .find((item) => item.movieId === movieCard.id || item.id === movieCard.id);
       setIsLike(like);
     }

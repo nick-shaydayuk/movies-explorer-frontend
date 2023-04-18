@@ -36,8 +36,10 @@ function App() {
       : []
   );
   const [currentUser, setCurrentUser] = useState({});
-  const [myMovies, setMyMovies] = useState([]);
-  const [isPreloaderOpen, setIsPreloaderOpen] = useState(false)
+  const [myMovies, setMyMovies] = useState(
+    localStorage.getItem('myMovies') ? localStorage.getItem('myMovies') : []
+  );
+  const [isPreloaderOpen, setIsPreloaderOpen] = useState(false);
 
   const handleLogin = (email, password) => {
     login(email, password)
@@ -69,18 +71,20 @@ function App() {
       });
   };
 
-  const deleteMovie = (movieId) => {
-    removeMovie(movieId).then(() => {
-      const newMyMovies = myMovies.filter((m) => m._id !== movieId);
+  const deleteMovie = (movie) => {
+    removeMovie(movie._id).then(() => {
+      const newMyMovies = myMovies.filter((m) => m.movieId !== movie.id && m.movieId !== movie.movieId);
       setMyMovies(newMyMovies);
-      localStorage.setItem('myMovies', JSON.stringify(myMovies));
+      localStorage.setItem('myMovies', JSON.stringify(newMyMovies));
     });
   };
 
   const likeMovie = (movie, user) => {
-    addMovie(movie, user).then(() => {
-      setMyMovies([...myMovies, movie]);
-      localStorage.setItem('myMovies', JSON.stringify(myMovies));
+    addMovie(movie, user).then((res) => {
+      const oldArr = JSON.parse(localStorage.getItem('myMovies'));
+      const newArr =  [res, ...oldArr]
+      setMyMovies(newArr);
+      localStorage.setItem('myMovies', JSON.stringify(newArr));
     });
   };
 
@@ -95,11 +99,11 @@ function App() {
 
   useEffect(() => {
     if (!isLogin) return;
-    setIsPreloaderOpen(true)
+    setIsPreloaderOpen(true);
     loadMovies().then((res) => {
       setMovies(res);
       localStorage.setItem('movies', JSON.stringify(res));
-      setIsPreloaderOpen(false)
+      setIsPreloaderOpen(false);
     });
     getMyData().then((res) => {
       setCurrentUser(res.data);
@@ -107,7 +111,7 @@ function App() {
     loadMyMovies().then((res) => {
       setMyMovies(res);
       localStorage.setItem('myMovies', JSON.stringify(res));
-      setIsPreloaderOpen(false)
+      setIsPreloaderOpen(false);
     });
   }, [isLogin]);
 
@@ -179,6 +183,7 @@ function App() {
                   movies={movies}
                   myMovies={myMovies}
                   likeMovie={likeMovie}
+                  deleteMovie={deleteMovie}
                   isPreloaderOpen={isPreloaderOpen}
                 />
               </ProtectedRoute>

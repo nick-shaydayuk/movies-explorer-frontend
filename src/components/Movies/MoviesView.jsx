@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { useEffect, useState } from 'react';
 
-function MoviesView({ isLogin, movies, myMovies, likeMovie, isPreloaderOpen }) {
+function MoviesView({ isLogin, movies, myMovies, likeMovie, deleteMovie, isPreloaderOpen }) {
   const [search, setSearch] = useState('');
   const [lookShort, setLookShort] = useState(false);
   const [selectedMovies, setSelectedMovies] = useState(movies);
@@ -74,6 +74,7 @@ function MoviesView({ isLogin, movies, myMovies, likeMovie, isPreloaderOpen }) {
           <MoviesCardList
             selectedMovies={selectedMovies}
             likeMovie={likeMovie}
+            deleteMovie={deleteMovie}
             myMovies={myMovies}
             isPreloaderOpen={isPreloaderOpen}
           />
