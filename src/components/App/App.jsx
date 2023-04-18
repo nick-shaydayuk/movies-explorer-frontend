@@ -37,6 +37,7 @@ function App() {
   );
   const [currentUser, setCurrentUser] = useState({});
   const [myMovies, setMyMovies] = useState([]);
+  const [isPreloaderOpen, setIsPreloaderOpen] = useState(false)
 
   const handleLogin = (email, password) => {
     login(email, password)
@@ -94,9 +95,11 @@ function App() {
 
   useEffect(() => {
     if (!isLogin) return;
+    setIsPreloaderOpen(true)
     loadMovies().then((res) => {
       setMovies(res);
       localStorage.setItem('movies', JSON.stringify(res));
+      setIsPreloaderOpen(false)
     });
     getMyData().then((res) => {
       setCurrentUser(res.data);
@@ -104,6 +107,7 @@ function App() {
     loadMyMovies().then((res) => {
       setMyMovies(res);
       localStorage.setItem('myMovies', JSON.stringify(res));
+      setIsPreloaderOpen(false)
     });
   }, [isLogin]);
 
@@ -118,6 +122,7 @@ function App() {
       setMyMovies(res);
       localStorage.setItem('myMovies', JSON.stringify(res));
     });
+    navigate();
   }, []);
 
   return (
@@ -174,6 +179,7 @@ function App() {
                   movies={movies}
                   myMovies={myMovies}
                   likeMovie={likeMovie}
+                  isPreloaderOpen={isPreloaderOpen}
                 />
               </ProtectedRoute>
             }

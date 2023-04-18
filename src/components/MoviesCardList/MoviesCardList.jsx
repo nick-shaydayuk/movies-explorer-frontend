@@ -4,8 +4,9 @@ import MovieCard from '../MovieCard/MovieCard';
 import useInitialCards from '../../utils/useInitialCards';
 import useGetScreenWidth from '../../utils/useGetScreenWidth';
 import { useEffect, useState } from 'react';
+import Preloader from '../Preloader/Preloader/Preloader';
 
-function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies }) {
+function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies, isPreloaderOpen }) {
   const actualPath = useLocation().pathname;
   const screenWidth = useGetScreenWidth();
   const initialCards = useInitialCards(screenWidth);
@@ -28,7 +29,7 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies }) {
 
   return (
     <>
-      <ul
+      {isPreloaderOpen ? <Preloader /> : <ul
         className={`card-list ${
           actualPath === '/saved-movies' ? 'card-list_saved-movies' : ''
         }`}
@@ -45,8 +46,8 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies }) {
             myMovies={myMovies}
           />
         ))}
-      </ul>
-      {selectedMovies.length === 0 ? (
+      </ul>}
+      {selectedMovies.length && !isPreloaderOpen === 0 ? (
         <p className="card-list__empty">
           Тут пока ничего, но обязательно появится!
         </p>
