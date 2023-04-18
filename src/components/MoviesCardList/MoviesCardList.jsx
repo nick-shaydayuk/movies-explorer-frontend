@@ -22,7 +22,10 @@ function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies, isPre
   }
 
   useEffect(() => {
-    if (!actualPath == '/movies') return;
+    if (actualPath === '/saved-movies') {
+      setInitialMovies(selectedMovies)
+      return
+    }
     setInitialMovies(selectedMovies.slice(0, initialCards.start));
     setCounter(initialCards.start);
   }, [selectedMovies]);

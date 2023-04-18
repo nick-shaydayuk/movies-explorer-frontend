@@ -37,7 +37,7 @@ function App() {
   );
   const [currentUser, setCurrentUser] = useState({});
   const [myMovies, setMyMovies] = useState(
-    localStorage.getItem('myMovies') ? localStorage.getItem('myMovies') : []
+    localStorage.getItem('myMovies') ? JSON.parse(localStorage.getItem('myMovies')) : []
   );
   const [isPreloaderOpen, setIsPreloaderOpen] = useState(false);
 
