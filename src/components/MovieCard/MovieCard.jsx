@@ -25,7 +25,6 @@ function MovieCard({ cardPath, duration, movieCard, deleteMovie, likeMovie, myMo
       setIsLike(true);
     } else {
       if (!movieCard._id) {
-        console.log(1);
         const movie = JSON.parse(localStorage.getItem('myMovies'))
         .find((item) => item.movieId === movieCard.id || item.id === movieCard.id);
         deleteMovie(movie)

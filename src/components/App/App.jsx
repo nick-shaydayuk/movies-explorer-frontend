@@ -37,9 +37,12 @@ function App() {
   );
   const [currentUser, setCurrentUser] = useState({});
   const [myMovies, setMyMovies] = useState(
-    localStorage.getItem('myMovies') ? JSON.parse(localStorage.getItem('myMovies')) : []
+    localStorage.getItem('myMovies')
+      ? JSON.parse(localStorage.getItem('myMovies'))
+      : []
   );
   const [isPreloaderOpen, setIsPreloaderOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = (email, password) => {
     login(email, password)
@@ -56,6 +59,9 @@ function App() {
       .catch((err) => {
         console.log(err);
         setIsLoginValid(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -68,12 +74,17 @@ function App() {
       .catch((err) => {
         console.log(err);
         setIsRegisterValid(false);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const deleteMovie = (movie) => {
     removeMovie(movie._id).then(() => {
-      const newMyMovies = myMovies.filter((m) => m.movieId !== movie.id && m.movieId !== movie.movieId);
+      const newMyMovies = myMovies.filter(
+        (m) => m.movieId !== movie.id && m.movieId !== movie.movieId
+      );
       setMyMovies(newMyMovies);
       localStorage.setItem('myMovies', JSON.stringify(newMyMovies));
     });
@@ -82,7 +93,7 @@ function App() {
   const likeMovie = (movie, user) => {
     addMovie(movie, user).then((res) => {
       const oldArr = JSON.parse(localStorage.getItem('myMovies'));
-      const newArr =  [res, ...oldArr]
+      const newArr = [res, ...oldArr];
       setMyMovies(newArr);
       localStorage.setItem('myMovies', JSON.stringify(newArr));
     });
@@ -91,7 +102,10 @@ function App() {
   const signOut = () => {
     logout().then(() => {
       setIsLogin(false);
+      localStorage.setItem('myMovies', JSON.stringify([]));
       localStorage.clear();
+      setMovies([]);
+      setMyMovies([]);
       navigate('/');
     });
     setCurrentUser(null);
@@ -147,7 +161,12 @@ function App() {
             path="/signin"
             element={
               <ProtectedUserRoute user={currentUser} isLogin={isLogin}>
-                <Login handleLogin={handleLogin} isValid={isLoginValid} />
+                <Login
+                  handleLogin={handleLogin}
+                  isValid={isLoginValid}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
               </ProtectedUserRoute>
             }
           />
@@ -158,6 +177,8 @@ function App() {
                 <Register
                   handleRegister={handleRegister}
                   isValid={isRegisterValid}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               </ProtectedUserRoute>
             }

@@ -7,7 +7,7 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
 
   function handleChange(e) {
     setSearch(e.target.value);
-    if (actualPath === '/saved-movies') return
+    if (actualPath === '/saved-movies') return;
     localStorage.setItem('search', e.target.value);
   }
 
@@ -16,11 +16,10 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
   }
 
   function handleClick() {
-    localStorage.setItem('lookShort', !lookShort);
     setLookShort(!lookShort);
+    if (actualPath === '/saved-movies') return;
+    localStorage.setItem('lookShort', !lookShort);
   }
-
-
 
   return (
     <div className="search-form">
@@ -57,7 +56,9 @@ function SearchForm({ search, setSearch, lookShort, setLookShort }) {
                 }`}
                 onClick={handleClick}
               />
-              <p className="search-form__button-subtitle">Короткометражки{lookShort}</p>
+              <p className="search-form__button-subtitle">
+                Короткометражки{lookShort}
+              </p>
             </div>
           </div>
         </div>

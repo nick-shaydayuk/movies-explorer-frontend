@@ -3,12 +3,11 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import { useRef, useState } from 'react';
 
-function Register({ handleRegister, isValid }) {
+function Register({ handleRegister, isValid, isLoading, setIsLoading }) {
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
 
   function isValidEmail(email) {
     return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]{2,61}(?:[a-zA-Z0-9-.][a-zA-Z0-9]{2,61})*$/.test(
