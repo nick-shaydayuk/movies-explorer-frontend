@@ -16,7 +16,28 @@
   }
 
   &:hover {
-    opacity: 0.8;;
+    opacity: 0.8;
+  }
+
+  &_remove {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    background-image: url(../../images/delete-m.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    transition: opacity 0.4s linear;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:focus-visible {
+      outline: 2px solid #2be080;
+    }
   }
 
 }

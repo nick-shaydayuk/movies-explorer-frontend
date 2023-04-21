@@ -1,9 +1,10 @@
 .techs {
   padding: 70px 18px;
-  background-color: #f5f5f5;
+  background-color: #fff;
 
   @media (min-width: 768px) {
-    padding: 100px 70px;
+    padding: 90px 50px;
+    background-color: #f5f5f5;
   }
 
   &__wrapper {
@@ -13,23 +14,28 @@
     width: 100%;
     margin: 0 auto;
     @media (min-width: 768px) {
-      max-width: 768px;
+      max-width: 668px;
     }
     @media (min-width: 1280px) {
-      max-width: 1280px;
+      max-width: 1140px;
     }
   }
 
   &__title {
-    font-size: 22px;
-    line-height: 27px;
+    font-size: 18px;
+    line-height: 22px;
     font-weight: 400;
     border-bottom: 1px solid #000;
-    padding-bottom: 23px;
+    padding-bottom: 28px;
     letter-spacing: -0.04em;
     margin-block: 0;
-    margin: 0 0 90px;
+    margin: 0 0 60px;
     text-align: left;
+
+    @media (min-width: 768px) {
+      font-size: 22px;
+      line-height: 27px;
+    }
   }
 
   &__header {
@@ -48,17 +54,23 @@
   &__text {
     max-width: 460px;
     margin-block: 0;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 16px;
     font-weight: 400;
     letter-spacing: -0.04em;
     margin: 0 auto 50px;
     text-align: center;
+
     @media (min-width: 768px) {
       margin: 0 auto 83px;
+      font-size: 12px;
+      line-height: 18px;
     }
-    @media (min-width: 768px) {
+
+    @media (min-width: 1280px) {
       margin: 0 auto 100px;
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 
@@ -70,10 +82,12 @@
     grid-template-columns: repeat(2, 84px);
     gap: 10px;
     justify-content: center;
-    @media (min-width: 1280px) {
+
+    @media (min-width: 768px) {
       grid-template-columns: repeat(7, 84px);
     }
-    @media (min-width: 768px) {
+
+    @media (min-width: 1280px) {
       grid-template-columns: repeat(7, 90px);
     }
   }
@@ -88,5 +102,8 @@
     line-height: 17px;
     border-radius: 10px;
     background-color: #e8e8e8;
+    @media (min-width: 768px) {
+      height: 57px;
+    }
   }
 }

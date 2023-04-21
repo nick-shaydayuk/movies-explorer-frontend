@@ -3,21 +3,37 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: #465dff;
   width: 100%;
-  min-height: 590px;
-  margin-top: 60px;
-  position: relative;
+  margin-top: 75px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  @media (min-width: 768px) {
+    padding: 0 20px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 0 40px;
+  }
 
   &__wrapper {
-    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: #F5F5F5;
     width: 100%;
+    min-height: 590px;
+    max-width: 292px;
     margin: 0 auto;
+    box-sizing: border-box;
     @media (min-width: 768px) {
-      max-width: 768px;
+      max-width: 728px;
     }
     @media (min-width: 1280px) {
-      max-width: 1280px;
+      max-width: 1200px;
     }
   }
 
@@ -35,7 +51,8 @@
   }
 
   &__title {
-    color: #fff;
+    border-radius: 10px;
+    color: #000;
     margin-block: 0;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
@@ -48,20 +65,21 @@
     position: relative;
     z-index: 2;
     font-weight: 400;
-    font-size: 31px;
-    line-height: 39px;
-    text-align: center;
-    letter-spacing: -0.04em;
+    font-size: 29px;
+    line-height: 37px;
+    width: 292px;
 
     @media (min-width: 768px) {
-      width: 730px;
-      font-size: 50px;
-      line-height: 58px;
+      width: 680px;
+      font-size: 40px;
+      line-height: 52px;
       padding-top: 205px;
     }
 
     @media (min-width: 1024px) {
-      width: 665px;
+      width: 730px;
+      font-size: 50px;
+      line-height: 58px;
     }
 
     &:hover {
@@ -76,25 +94,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
   }
 
   &__links-container {
     display: flex;
     flex-direction: row;
-    gap: 40px;
+    gap: 6px;
     justify-content: center;
     align-items: center;
+    @media (min-width: 768px) {
+      gap: 10px;
+    }
   }
 
   &__link {
     font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 16px;
+    padding: 5px 15.5px;
     display: flex;
     align-items: center;
-    text-decoration-line: underline;
-    color: #000000;
+    text-decoration-line: none;
+    color: #fff;
+    background: #E8E8E8;
+    border-radius: 6px;
+    max-width: 82px;
+    @media (min-width: 768px) {
+      max-width: 96px;
+      padding: 10px 17px;
+      border-radius: 10px;
+    }
   }
 }

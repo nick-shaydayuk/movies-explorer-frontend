@@ -1,9 +1,8 @@
 .about-me {
   padding: 70px 14px;
-  
 
   @media (min-width: 768px) {
-    padding: 110px 70px 0;
+    padding: 90px 50px 0;
   }
 
   &__wrapper {
@@ -12,10 +11,29 @@
     width: 100%;
     margin: 0 auto;
     @media (min-width: 768px) {
-      max-width: 768px;
+      max-width: 668px;
     }
     @media (min-width: 1280px) {
-      max-width: 1280px;
+      max-width: 1140px;
+    }
+  }
+
+  &__title {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -0.04em;
+    color: #000000;
+    margin: 0;
+    margin-bottom: 60px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid #000;
+
+    @media (min-width: 768px) {
+      font-size: 22px;
+      line-height: 27px;
     }
   }
 
@@ -25,6 +43,7 @@
     justify-content: space-between;
     @media (min-width: 768px) {
       flex-direction: row;
+      gap: 49px;
     }
   }
 
@@ -41,12 +60,14 @@
     font-weight: 400;
     color: #000;
     margin-block: 0;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     letter-spacing: -0.04em;
     padding-top: 40px;
+    font-family: 'Inter', sans-serif;
     @media (min-width: 768px) {
       font-size: 50px;
       line-height: 58px;
+      padding-top: 0;
     }
   }
 
@@ -63,27 +84,43 @@
   }
 
   &__description {
-    font-size: 14px;
-    line-height: 22px;
+    font-size: 11px;
+    line-height: 16px;
     font-weight: 400;
     margin-block: 0;
-    margin-bottom: 99px;
+    margin-bottom: 40px;
 
     @media (min-width: 768px) {
       display: inline-block;
       max-width: 600px;
+      margin-bottom: 87px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    @media (min-width: 1280px) {
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 
   &__photo {
     width: 292px;
     border-radius: 10px;
+
     @media (min-width: 768px) {
+      width: 255px;
+      height: 307px;
+    }
+
+    @media (min-width: 1280px) {
       width: 270px;
+      height: 327px;
     }
   }
 
   &__link {
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     line-height: 17px;
     font-weight: 500;

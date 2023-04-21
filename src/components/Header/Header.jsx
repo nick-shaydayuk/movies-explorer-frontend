@@ -1,5 +1,4 @@
 import './Header.scss';
-import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import AuthNavigation from '../AuthNavigation/AuthNavigation';
@@ -8,22 +7,14 @@ import { useState } from 'react';
 import MobileMenu from '../MobileMenu/MobileMenu';
 
 function Header({ isLogin }) {
-  const actualPath = useLocation().pathname;
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
-
   return (
-    <header
-      className={`header ${actualPath === '/' ? 'header-type-landing' : ''}`}
-    >
+    <header className="header">
       <div className="header__content">
         <Logo />
         <div className="header__container">
-          {true ? (
+          {isLogin ? (
             <div className="header__link-container">
               <Navigation />
               <AccountLink />
@@ -36,8 +27,7 @@ function Header({ isLogin }) {
             <AuthNavigation />
           )}
         </div>
-
-        {isMenuOpen ? <MobileMenu closeMenu={closeMenu} /> : <></>}
+        {isMenuOpen ? <MobileMenu closeMenu={() => setIsMenuOpen(false)} /> : <></>}
       </div>
     </header>
   );

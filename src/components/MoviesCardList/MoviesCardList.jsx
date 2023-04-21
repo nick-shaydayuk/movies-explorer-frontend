@@ -1,136 +1,73 @@
 import './MoviesCardList.scss';
 import { useLocation } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
-import cardPath from '../../images/movie.png';
+import useInitialCards from '../../utils/useInitialCards';
+import useGetScreenWidth from '../../utils/useGetScreenWidth';
+import { useEffect, useState } from 'react';
+import Preloader from '../Preloader/Preloader/Preloader';
 
-function MovieCardList() {
-  const currentPath = useLocation().pathname;
-  const movieCardsTest = [
-    {
-      id: 0,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '1ч42м',
-    },
-    {
-      id: 1,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч08м',
-    },
-    {
-      id: 2,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 3,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 4,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 5,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 6,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 7,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 8,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 9,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 10,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 11,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 12,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 13,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 14,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-    {
-      id: 15,
-      cardPath,
-      title: '33 слова о дизайне',
-      duration: '3ч09м',
-    },
-  ];
-  function handleMovie(evt) {
-    console.log(evt);
+function MovieCardList({ selectedMovies, deleteMovie, likeMovie, myMovies, isPreloaderOpen }) {
+  const actualPath = useLocation().pathname;
+  const screenWidth = useGetScreenWidth();
+  const initialCards = useInitialCards(screenWidth);
+  const [initialMovies, setInitialMovies] = useState([]);
+  const [counter, setCounter] = useState(0);
+
+  function handleMoreMovies() {
+    setInitialMovies([
+      ...initialMovies,
+      ...selectedMovies.slice(counter, counter + initialCards.add),
+    ]);
+    setCounter(counter + initialCards.add);
   }
+
+  useEffect(() => {
+    if (actualPath === '/saved-movies') {
+      setInitialMovies(selectedMovies)
+      return
+    }
+    setInitialMovies(selectedMovies.slice(0, initialCards.start));
+    setCounter(initialCards.start);
+  }, [selectedMovies]);
+
   return (
     <>
-      <ul
+      {isPreloaderOpen ? <Preloader /> : <ul
         className={`card-list ${
-          currentPath === '/saved-movies' ? 'card-list_saved-movies' : ''
+          actualPath === '/saved-movies' ? 'card-list_saved-movies' : ''
         }`}
       >
-        {movieCardsTest.map((movieCard) => (
+        {initialMovies.map((movieCard) => (
           <MovieCard
-            key={movieCard.id}
-            cardPath={cardPath}
+            key={actualPath === '/saved-movies' ? movieCard._id : movieCard.id}
+            cardPath={movieCard.image.url}
             title={movieCard.title}
-            duracion={movieCard.duration}
+            duration={movieCard.duration}
+            movieCard={movieCard}
+            deleteMovie={deleteMovie}
+            likeMovie={likeMovie}
+            myMovies={myMovies}
           />
         ))}
-      </ul>
-      {currentPath === '/movies' && (
+      </ul>}
+      {selectedMovies.length && !isPreloaderOpen === 0 ? (
+        <p className="card-list__empty">
+          Тут пока ничего, но обязательно появится!
+        </p>
+      ) : (
+        <></>
+      )}
+      {actualPath === '/movies' && selectedMovies.length > counter ? (
         <button
           type="button"
-          aria-label="Кнопка ещё"
-          onClick={handleMovie}
+          aria-label="Мало фильмов? Жми!"
+          onClick={handleMoreMovies}
           className="more-button"
         >
           Ещё
         </button>
+      ) : (
+        <></>
       )}
     </>
   );

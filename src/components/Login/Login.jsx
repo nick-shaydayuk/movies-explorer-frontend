@@ -1,10 +1,27 @@
 import './Login.scss';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import { useRef, useState } from 'react';
 
-function Login() {
+function Login({ handleLogin, isValid, isLoading, setIsLoading }) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const [isEmailValid, setIsEmailValid] = useState(true);
+
+  function isValidEmail(email) {
+    return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9]{2,61}(?:[a-zA-Z0-9-.][a-zA-Z0-9]{2,61})*$/.test(
+      email
+    );
+  }
+
   function onSubmit(e) {
+    setIsLoading(true)
     e.preventDefault();
+    if (!isValidEmail(emailRef.current.value)) {
+      setIsEmailValid(false);
+      return;
+    }
+    handleLogin(emailRef.current.value, passwordRef.current.value)
   }
   return (
     <main>
@@ -18,32 +35,55 @@ function Login() {
               <input
                 id="Email"
                 name="Email"
-                className="form-login__input"
+                className={`form-login__input ${
+                  !isValid || !isEmailValid ? 'form-login__input_invalid' : ''
+                }`}
                 type="Email"
+                ref={emailRef}
                 required
+                disabled={isLoading}
               />
-              <span className="form-login__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {isValid ? (
+                <></>
+              ) : (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              )}
+              {isEmailValid ? (
+                <></>
+              ) : (
+                <span className="form-register__error">
+                  Введите корретный email
+                </span>
+              )}
             </label>
             <label className="form-login__label" htmlFor="password">
               Пароль
               <input
                 id="password"
                 name="password"
-                className="form-login__input"
+                className={`form-login__input ${
+                  isValid ? '' : 'form-login__input_invalid'
+                }`}
                 type="password"
                 minLength="2"
                 maxLength="20"
+                ref={passwordRef}
                 required
+                disabled={isLoading}
               />
-              <span className="form-login__error">
-                Неправильный пароль или e-mail!
-              </span>
+              {isValid ? (
+                <></>
+              ) : (
+                <span className="form-register__error">
+                  Что-то пошло не так...
+                </span>
+              )}
             </label>
           </div>
           <div>
-            <button type="submit" className="form-login__submit">
+            <button type="submit" className="form-login__submit" disabled={isLoading}>
               Войти
             </button>
             <div>

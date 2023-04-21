@@ -1,6 +1,7 @@
-.main {
+.movies {
   max-width: 320px;
   margin: 0 auto;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     max-width: 768px;
@@ -8,5 +9,9 @@
 
   @media (min-width: 1280px) {
     max-width: 1280px;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 }

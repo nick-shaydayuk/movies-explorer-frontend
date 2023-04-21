@@ -1,15 +1,14 @@
-import { useState } from 'react';
 import './MovieCardButton.scss';
+import { useLocation } from 'react-router-dom';
 
-function MovieCardButton() {
-  const [isLike, setIsLike] = useState(false);
+function MovieCardButton({ isLike, handleClick }) {
+  const actualPath = useLocation().pathname;
 
-  function handleClick() {
-    setIsLike(!isLike);
-  }
   return (
     <button
-      className={`movie-button ${isLike ? 'movie-button_like' : ''}`}
+      className={`movie-button ${isLike ? 'movie-button_like' : ''} ${
+        actualPath === '/saved-movies' ? 'movie-button_remove' : ''
+      }`}
       type="button"
       aria-label="Выбрать Фильм"
       onClick={handleClick}
